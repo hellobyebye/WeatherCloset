@@ -9,7 +9,7 @@
  * https://sailsjs.com/config/bootstrap
  */
 
-module.exports.bootstrap = async function(done) {
+module.exports.bootstrap = async function (done) {
 
   // By convention, this is a good place to set up fake data during development.
   //
@@ -26,6 +26,54 @@ module.exports.bootstrap = async function(done) {
   //   // etc.
   // ]);
   // ```
+
+  sails.bcrypt = require('bcrypt');
+  const saltRounds = 10;
+
+  sails.getInvalidIdMsg = function (opts) {
+
+    if (opts.id && isNaN(parseInt(opts.id))) {
+      return "Primary key specfied is invalid (incorrect type).";
+    }
+
+    if (opts.fk && isNaN(parseInt(opts.fk))) {
+      return "Foreign key specfied is invalid (incorrect type).";
+    }
+
+    return null;        // falsy
+
+  }
+
+  if (await Item.count() > 0) {
+    return done();
+  }
+
+  await Item.createEach([
+    {
+      name: "tshirt1", category: "top", style: "casual", remark: "This is a T-shirt",
+      image_URL: "", temperature: "", season: "summer", wind: "medium", material: "cotton"
+    },
+    {
+      name: "skirt1", category: "bottom", style: "casual", remark: "This is a skirt",
+      image_URL: "", temperature: "", season: "summer", wind: "weak", material: "cotton"
+    },
+  ]);
+
+
+  const hash = await sails.bcrypt.hash('123456', saltRounds);
+
+  await User.createEach([
+    { "username": "user", "password": hash, "role": "user" },
+    { "username": "user2", "password": hash, "role": "user" },
+    // etc.
+  ]);
+
+  const user = await User.findOne({ username: "user" });
+  const tshirt = await Item.findOne({ name: "tshirt1" });
+  const skirt = await Item.findOne({ name: "skirt1" });
+
+  await User.addToCollection(user.id, 'owns').members(tshirt.id);
+  await User.addToCollection(user.id, 'owns').members(skirt.id);
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)
