@@ -47,6 +47,9 @@ module.exports.routes = {
 
   'GET /item/detail/:id': 'ItemController.detail',
 
+  'GET /item/allItems': 'ItemController.allItems',
+  'GET /item/allOutfits': 'ItemController.allOutfits',
+
   'POST /item/create': 'UserController.create',
 
   'GET /item/update/:id': 'ItemController.update',

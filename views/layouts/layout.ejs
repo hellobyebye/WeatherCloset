@@ -33,11 +33,12 @@
   <link rel="stylesheet" href="/styles/bootstrap.css">
   <link rel="stylesheet" href="/styles/importer.css">
   <!--STYLES END-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-    crossorigin="anonymous">
-    
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
   <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css"
+    rel="stylesheet">
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
@@ -53,12 +54,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <div id="nav_home"><a class="nav-item nav-link active" href="/item/allItems">Items<span class="sr-only">(current)</span></a></div>
-          <div id="nav_search"><a class="nav-item nav-link" href="/item/search">Search</a></div>
-          <% if (req.session.role == "user"){ %>
+          <div id="nav_home"><a class="nav-item nav-link active" href="/item/allItems">Items<span
+                class="sr-only">(current)</span></a></div>
+          <div id="nav_search"><a class="nav-item nav-link" href="/item/allOutfits">Outfits</a></div>
           <div id="nav_create"><a class="nav-item nav-link" href="/item/create">Create</a></div>
+          <% if (req.session.role == "user"){ %>
           <div id="nav_admin"><a class="nav-item nav-link disabled" href="/item/admin">Admin</a></div>
-          <div id="nav_registered"><a class="nav-item nav-link disabled" href="/user/myReg">My Registered Events</a></div>
+          <div id="nav_registered"><a class="nav-item nav-link disabled" href="/user/myReg">My Registered Events</a>
+          </div>
           <% } %>
         </div>
       </div>
@@ -163,24 +166,28 @@
   <!--SCRIPTS-->
   <script src="/dependencies/sails.io.js"></script>
   <!--SCRIPTS END-->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
-    <script>
-        $(function () {
-            $(".datepicker").datepicker();
-        });
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+  <script>
+    $(function () {
+      $(".datepicker").datepicker();
+    });
 
-        var t1 = document.getElementById("nav_search");
-        t1.onclick = function () {
-            t1.classList.add("active");
-        }
+    var t1 = document.getElementById("nav_search");
+    t1.onclick = function () {
+      t1.classList.add("active");
+    }
 
-    </script>
+  </script>
 </body>
 
 </html>

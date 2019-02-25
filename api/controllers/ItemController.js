@@ -10,11 +10,61 @@ module.exports = {
     // action - allItems 
     allItems: async function (req, res) {
 
-        var items = await Item.find();
+        const qName = req.query.name || "";
+        const qStyle = req.query.style || "";
+        const qCategory = req.query.category || "";
+        const qSeason = req.query.season || "";
+
+        var filtereditem = await Item.find({
+            where: {
+                name: {
+                    contains: qName,
+                },
+                style: {
+                    contains: qStyle,
+                },
+                category: {
+                    contains: qCategory,
+                },
+                season: {
+                    contains: qSeason,
+                },
+            },
+            sort: 'createdAt DESC'
+        });
         if (req.wantsJSON) {
-            return res.json(items);
+            return res.json(filtereditem);
         } else {
-            return res.view('item/allItems', { 'allItems': items });
+            return res.view('item/allItems', { 'filteredItem': filtereditem });
+        }
+    },
+
+    // action - allOutfits
+    allOutfits: async function (req, res) {
+
+        const qName = req.query.name || "";
+        const qStyle = req.query.style || "";
+        const qSeason = req.query.season || "";
+
+        var filtereditem = await Item.find({
+            where: {
+                name: {
+                    contains: qName,
+                },
+                style: {
+                    contains: qStyle,
+                },
+                season: {
+                    contains: qSeason,
+                },
+            },
+            sort: 'createdAt DESC'
+        });
+
+        if (req.wantsJSON) {
+            return res.json(filteredItem);
+        } else {
+            return res.view('item/allOutfits', { 'filteredItem': filteredItem });
         }
     },
 
@@ -28,7 +78,7 @@ module.exports = {
         var model = await Item.findOne(req.params.id);
 
         if (!model) return res.notFound();
-        
+
 
         if (req.wantsJSON) {
             return res.json(model);
