@@ -55,6 +55,9 @@ module.exports = {
       type: "string"//red
     },
 
+    userId: {
+      model: 'user'
+    }
 
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
@@ -67,10 +70,10 @@ module.exports = {
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
     
-    belongsTo: {
-      collection: 'User',
-      via: 'owns'
-    }
+    // belongsTo: {
+    //   collection: 'User',
+    //   via: 'owns'
+    // }
 
   },
 

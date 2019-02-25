@@ -41,7 +41,7 @@ module.exports = {
 
     owns: {
       collection: 'Item',
-      via: 'belongsTo'
+      via: 'userId'
     },
 
   },
