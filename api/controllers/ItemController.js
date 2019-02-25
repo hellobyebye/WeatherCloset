@@ -7,6 +7,13 @@
 
 module.exports = {
 
+    // action - myhomepage 
+    myhomepage: async function (req, res) {
+
+        var items = await Item.find();
+        return res.view('item/myhomepage', { 'allItems': items });
+    },
+
     // action - create
     create: async function (req, res) {
 
@@ -19,6 +26,21 @@ module.exports = {
         await Item.create(req.body.Item);
 
         return res.ok("Successfully created!");
+    },
+
+    populate: async function (req, res) {
+
+        if (!['ownedBy'].includes(req.params.association)) return res.notFound();
+
+        const message = sails.getInvalidIdMsg(req.params);
+
+        if (message) return res.badRequest(message);
+
+        var model = await Item.findOne(req.params.id).populate(req.params.association);
+
+        if (!model) return res.notFound();
+
+        return res.json(model);
     },
 
 };

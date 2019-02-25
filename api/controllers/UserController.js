@@ -58,5 +58,61 @@ module.exports = {
         });
     },
 
+    populate: async function (req, res) {
+
+        if (!['owns'].includes(req.params.association)) return res.notFound();
+
+        const message = sails.getInvalidIdMsg(req.params);
+
+        if (message) return res.badRequest(message);
+
+        var model = await User.findOne(req.params.id).populate(req.params.association);
+
+        if (!model) return res.notFound();
+
+        return res.json(model);
+
+    },
+
+    //add item to my closet
+    add: async function (req, res) {
+
+        if (!await User.findOne(req.session.userid)) return res.notFound();
+
+        if (!await Item.findOne(parseInt(req.params.fk))) return res.notFound();
+
+        await User.addToCollection(req.session.userid, 'owns').members(req.params.fk);
+
+        return res.ok('Operation completed.');
+
+    },
+
+    //remove item from my closet
+    remove: async function (req, res) {
+
+        const message = sails.getInvalidIdMsg(req.params);
+
+        if (message) return res.badRequest(message);
+
+        if (!await User.findOne(req.session.userid)) return res.notFound();
+
+        await User.removeFromCollection(req.session.userid, 'owns').members(req.params.fk);
+
+        return res.ok('Operation completed.');
+
+    },
+
+    //My Closet
+    myCloset: async function (req, res) {
+
+        var myCloset = await User.findOne(req.session.userid).populate('owns');
+
+        if (req.wantsJSON) {
+            return res.json(myCloset.owns);
+        } else {
+            return res.view('user/myCloset', { 'myCloset': myCloset.owns });
+        }
+    },
+
 };
 

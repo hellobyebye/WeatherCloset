@@ -25,7 +25,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'item/homepage'
+    view: 'item/myhomepage'
   },
 
   /***************************************************************************
@@ -44,6 +44,15 @@ module.exports.routes = {
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
 
+  '/item/populate': { view: '404' },
+  '/user/populate': { view: '404' },
+  '/user/add': { view: '404' },
+  '/user/remove': { view: '404' },
+
+  '/item/:id/:association': 'ItemController.populate',
+  '/user/:id/:association': 'UserController.populate',
+  '/user/:id/:association/add/:fk': 'UserController.add',
+  '/user/:id/:association/remove/:fk': 'UserController.remove',
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗

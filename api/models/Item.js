@@ -14,7 +14,9 @@ module.exports = {
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
     name: {
-      type: "string"
+      type: "string",
+      unique: true,
+      required: true
     },
 
     category: {
@@ -23,6 +25,10 @@ module.exports = {
 
     style: {
       type: "string" //formal, casual
+    },
+
+    season: {
+      type: "string"//winter
     },
 
     remark: {
@@ -37,16 +43,16 @@ module.exports = {
       type: "number" //degree
     },
 
-    season: {
-      type: "string"//winter
-    },
-
     wind: {
       type: "string"//strong, medium, weak
     },
 
     material: {
       type: "string" //cotton
+    },
+
+    color: {
+      type: "string"//red
     },
 
 
@@ -60,7 +66,8 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    ownedBy: {
+    
+    belongsTo: {
       collection: 'User',
       via: 'owns'
     }
@@ -70,7 +77,7 @@ module.exports = {
   getInvalidIdMsg: function (opts) {
 
     if (typeof opts.id === "undefined" || isNaN(parseInt(opts.id)))
-      return "Event not specified or with incorrect type.";
+      return "Item not specified or with incorrect type.";
 
     return null;        // falsy
 
