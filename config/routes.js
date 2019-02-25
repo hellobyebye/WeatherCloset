@@ -25,7 +25,8 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'item/myhomepage'
+    //view: 'item/allItems'
+    view: 'user/login'
   },
 
   /***************************************************************************
@@ -43,6 +44,9 @@ module.exports.routes = {
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
+
+
+  'POST /item/create': 'UserController.create',
 
   '/item/populate': { view: '404' },
   '/user/populate': { view: '404' },

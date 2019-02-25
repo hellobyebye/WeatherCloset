@@ -7,11 +7,15 @@
 
 module.exports = {
 
-    // action - myhomepage 
-    myhomepage: async function (req, res) {
+    // action - allItems 
+    allItems: async function (req, res) {
 
         var items = await Item.find();
-        return res.view('item/myhomepage', { 'allItems': items });
+        if (req.wantsJSON) {
+            return res.json(items);
+        } else {
+            return res.view('item/allItems', { 'allItems': items });
+        }
     },
 
     // action - create
@@ -23,9 +27,17 @@ module.exports = {
         if (typeof req.body.Item === "undefined")
             return res.badRequest("Form-data not received.");
 
-        await Item.create(req.body.Item);
+        //if (!await User.findOne(req.session.username)) return res.send("User not found");;
 
-        return res.ok("Successfully created!");
+        // var user = await User.findOne({ username : req.session.username });
+
+        await Item.create(req.body.Item);
+        
+        if (req.wantsJSON) {
+            return res.json(item);
+        } else {
+            return res.ok("Successfully created!");
+        }
     },
 
     populate: async function (req, res) {

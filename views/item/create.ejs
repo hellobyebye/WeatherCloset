@@ -1,5 +1,5 @@
 <!--create.ejs-->
-<form action="/item/create" method="POST">
+<form id="theForm" action="/item/create" method="POST">
     <div class="form-group">
         <label>Name</label>
         <input type="text" class="form-control" name="Item[name]" required>
@@ -17,18 +17,17 @@
     </div>
     <div class="form-group">
         <label>Style:</label>
-        <select class="form-control" name="Item[category]">
+        <select class="form-control" name="Item[style]">
             <option>Please pick one:</option>
-            <option>Top</option>
-            <option>Button</option>
-            <option>Coat</option>
-            <option>Dress</option>
-            <option>Accessory</option>
+            <option>Formal</option>
+            <option>Casual</option>
+            <option>Holiday</option>
         </select>
     </div>
     <div class="form-group">
-        <label>Age</label>
-        <input type="number" class="form-control" name="Item[age]" required>
+        <label>Temperature:</label>
+        <input type="number" class="form-control" name="Item[temperature]">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Create</button>
+    
 </form>

@@ -40,7 +40,7 @@ module.exports = {
             // return res.json(req.session);
 
             if (req.wantsJSON) {
-                return res.redirect('/item/homepage');
+                return res.redirect('/item/allItems');
             } else {
                 return res.ok("Login successfully");
             }
@@ -81,10 +81,33 @@ module.exports = {
 
         if (!await Item.findOne(parseInt(req.params.fk))) return res.notFound();
 
-        await User.addToCollection(req.session.userid, 'owns').members(req.params.fk);
+        //await User.addToCollection(req.session.userid, 'owns').members(req.params.fk);
 
         return res.ok('Operation completed.');
 
+    },
+    create: async function (req, res) {
+
+        if (req.method == "GET")
+            return res.view('item/create');
+
+        if (typeof req.body.Item === "undefined")
+            return res.badRequest("Form-data not received.");
+
+        if (!await User.findOne(req.session.userid)) return res.send("User not found");
+        var user = await User.findOne(req.session.userid);
+        
+        if (!req.body.Item) return res.send("Item not find");;
+        var item = req.body.Item;
+        item.userId = user.id;
+
+        await Item.create(item);
+
+        if (req.wantsJSON) {
+            return res.json(item);
+        } else {
+            return res.ok("Successfully created!");
+        }
     },
 
     //remove item from my closet
@@ -102,15 +125,15 @@ module.exports = {
 
     },
 
-    //My Closet
-    myCloset: async function (req, res) {
+    //My Closet Items
+    myItems: async function (req, res) {
 
-        var myCloset = await User.findOne(req.session.userid).populate('owns');
+        var myItems = await User.findOne(req.session.userid).populate('owns');
 
         if (req.wantsJSON) {
-            return res.json(myCloset.owns);
+            return res.json(myItems.owns);
         } else {
-            return res.view('user/myCloset', { 'myCloset': myCloset.owns });
+            return res.view('user/myItems', { 'Items': myItems.owns });
         }
     },
 

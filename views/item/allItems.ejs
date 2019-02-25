@@ -1,0 +1,27 @@
+<!-- allItems.ejs-->
+
+<div class="container">
+    <div class="row">
+
+        <% allItems.forEach( function(model) { %>
+        <div class="card col-xl-6 col-12 ">
+            <div class=" h-100">
+
+                <br>
+                <h5 class="card-title">
+                    <a href="/item/detail/<%= model.id %>"><%= model.name %></a>
+                </h5>
+                <div class="image">
+                    <img class="float-left img-fluid img-thumbnail"
+                        style="width:50%; height:250px; object-fit:cover; margin-right:5px" src="<%= model.image_URL %>"
+                        alt="No image">
+                </div>
+                <p>
+                    <%= model.userId %>
+                </p>
+            </div>
+        </div>
+        <% }); %>
+
+    </div>
+</div>

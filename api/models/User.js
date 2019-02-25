@@ -30,6 +30,14 @@ module.exports = {
       defaultsTo: 'everyone'
     },
 
+    gender: {
+      type: 'string',
+    },
+
+    age:  {
+      type: 'number',
+    },
+
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝

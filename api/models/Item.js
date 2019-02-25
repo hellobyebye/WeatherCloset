@@ -56,7 +56,8 @@ module.exports = {
     },
 
     userId: {
-      model: 'user'
+      model: 'user',
+      //required: true
     }
 
 
