@@ -45,8 +45,14 @@ module.exports.routes = {
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
 
+  'GET /item/detail/:id': 'ItemController.detail',
 
   'POST /item/create': 'UserController.create',
+
+  'GET /item/update/:id': 'ItemController.update',
+  'POST /item/update/:id': 'ItemController.update',
+
+  'DELETE /item/:id': 'ItemController.delete',
 
   '/item/populate': { view: '404' },
   '/user/populate': { view: '404' },

@@ -62,12 +62,12 @@ module.exports.bootstrap = async function (done) {
   await Item.createEach([
     {
       name: "tshirt1", category: "top", style: "casual", remark: "This is a T-shirt",
-      image_URL: "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi-zv6_ybjfAhVNdXAKHeOYAQYQjRx6BAgBEAU&url=https%3A%2F%2Fwww.sunspel.com%2Fuk%2Fmens-short-sleeve-crew-neck-t-shirt-black.html&psig=AOvVaw3lSTUloWP4YBI9h-iSF52v&ust=1545744597809742",
+      image_URL: "https://res.cloudinary.com/teepublic/image/private/s--iIpdpqFc--/t_Resized%20Artwork/c_crop,x_10,y_10/c_fit,w_470/c_crop,g_north_west,h_626,w_470,x_0,y_0/g_north_west,u_upload:v1462829017:production:blanks:qe3008lhp5hquxmwp4a0,x_-395,y_-325/b_rgb:eeeeee/c_limit,f_auto,h_285,q_90,w_285/v1548276441/production/designs/4066543_0",
       temperature: "25", season: "summer", wind: "medium", material: "cotton", color: "white", userId: userId
     },
     {
       name: "skirt1", category: "bottom", style: "casual", remark: "This is a skirt",
-      image_URL: "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwinnuPRybjfAhVCfXAKHQhgAbIQjRx6BAgBEAU&url=https%3A%2F%2Fwww.amazon.com%2FUrban-CoCo-Womens-Versatile-Stretchy%2Fdp%2FB07BSZSR2Y&psig=AOvVaw0RyqKK5XVeF69Wi8vTk1aw&ust=1545744633638892",
+      image_URL: "https://images-na.ssl-images-amazon.com/images/I/411RPnLvQBL._SX342_QL70_.jpg",
       temperature: "25", season: "summer", wind: "weak", material: "cotton", color: "black", userId: userId
     },
   ]);

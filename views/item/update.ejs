@@ -1,0 +1,106 @@
+<!--update.ejs-->
+
+<form action="/item/update/<%= item.id %>" method="POST">
+    <div class="form-row">
+        <div class="col-12 col-xl-6">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" name="Item[name]" value="<%= item.name %>" required>
+            </div>
+            <div class="form-group">
+                <label>Category:</label>
+                <select class="form-control" name="Item[category]" value="<%= item.category %>">
+                    <option><%= item.category %></option>
+                    <option>pick a new one:</option>
+                    <option>Top</option>
+                    <option>Button</option>
+                    <option>Coat</option>
+                    <option>Dress</option>
+                    <option>Accessory</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Style:</label>
+                <select class="form-control" name="Item[style]" value="<%= item.style %>">
+                    <option><%= item.style %></option>
+                    <option>pick a new one:</option>
+                    <option>Formal</option>
+                    <option>Casual</option>
+                    <option>Holiday</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Season:</label>
+                <select class="form-control" name="Item[season]" value="<%= item.season %>">
+                    <option><%= item.season %></option>
+                    <option>pick a new one:</option>
+                    <option>Spring</option>
+                    <option>Summer</option>
+                    <option>Autumn</option>
+                    <option>Winter</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Temperature:</label>
+                <input type="number" class="form-control" name="Item[temperature]" value="<%= item.temperature %>">
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-6">
+            <div class="form-group">
+                <label>Image URL:</label>
+                <input type="url" class="form-control" name="Item[image_URL]" value="<%= item.image_URL %>">
+            </div>
+            <div class="form-group">
+                <label>Remark:</label>
+                <textarea type="text" class="form-control" name="Item[remark]" rows="3" value="<%= item.remark %>"><%= item.remark %></textarea>
+            </div>
+            <div class="form-group">
+                <label>Wind:</label>
+                <input type="text" class="form-control" name="Item[wind]" value="<%= item.wind %>">
+            </div>
+            <div class="form-group">
+                <label>Material:</label>
+                <input type="text" class="form-control" name="Item[material]" value="<%= item.material %>">
+            </div>
+            <div class="form-group">
+                <label>Color:</label>
+                <input type="text" class="form-control" name="Item[color]" value="<%= item.color %>">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+<button type="button" class="btn btn-danger" onclick="deleteItem('<%= item.id %>')">Delete</button>
+<div id="deleteResult"></div>
+<br><br>
+
+<script>
+    async function deleteItem(id) {
+
+        var dr = document.getElementById("deleteResult");
+
+        var r = confirm("Confirm Delete?");
+        if (r == true) {
+
+            var response = await fetch("/item/" + id, {
+                method: "DELETE",
+                credentials: 'same-origin',
+            });
+
+            console.log(response);
+
+            if (response.status == 200) {
+                var data = await response.json();
+                dr.innerHTML = data;
+                location = location;
+            } else {
+                dr.innerHTML = response.statusText;
+            }
+
+        } else {
+            dr.innerHTML = "cancelled";
+        }
+    };
+</script>

@@ -18,26 +18,81 @@ module.exports = {
         }
     },
 
-    // action - create
-    create: async function (req, res) {
+    // action - detail
+    detail: async function (req, res) {
 
-        if (req.method == "GET")
-            return res.view('item/create');
+        var message = Item.getInvalidIdMsg(req.params);
 
-        if (typeof req.body.Item === "undefined")
-            return res.badRequest("Form-data not received.");
+        if (message) return res.badRequest(message);
 
-        //if (!await User.findOne(req.session.username)) return res.send("User not found");;
+        var model = await Item.findOne(req.params.id);
 
-        // var user = await User.findOne({ username : req.session.username });
-
-        await Item.create(req.body.Item);
+        if (!model) return res.notFound();
         
+
         if (req.wantsJSON) {
-            return res.json(item);
+            return res.json(model);
         } else {
-            return res.ok("Successfully created!");
+            return res.view('item/detail', { 'detail': model });
         }
+
+    },
+
+    // action - update
+    update: async function (req, res) {
+
+        var message = Item.getInvalidIdMsg(req.params);
+
+        if (message) return res.badRequest(message);
+
+        if (req.method == "GET") {
+
+            var model = await Item.findOne(req.params.id);
+
+            if (!model) return res.notFound();
+
+            return res.view('item/update', { 'item': model });
+
+        } else {
+
+            if (typeof req.body.Item === "undefined")
+                return res.badRequest("Form-data not received.");
+
+            var models = await Item.update(req.params.id).set({
+                name: req.body.Item.name,
+                category: req.body.Item.category,
+                style: req.body.Item.style,
+                image_URL: req.body.Item.image_URL,
+                season: req.body.Item.season,
+                remark: req.body.Item.remark,
+                temperature: req.body.Item.temperature,
+                wind: req.body.Item.wind,
+                material: req.body.Item.material,
+                color: req.body.Item.color,
+            }).fetch();
+
+            if (models.length == 0) return res.notFound();
+
+            return res.ok("Record updated");
+
+        }
+    },
+
+    // action - delete 
+    delete: async function (req, res) {
+
+        if (req.method == "GET") return res.forbidden();
+
+        var message = Item.getInvalidIdMsg(req.params);
+
+        if (message) return res.badRequest(message);
+
+        var models = await Item.destroy(req.params.id).fetch();
+
+        if (models.length == 0) return res.notFound();
+
+        return res.ok("Item Deleted.");
+
     },
 
     populate: async function (req, res) {

@@ -1,0 +1,84 @@
+<!--detail.ejs-->
+
+
+<div class="container">
+
+    <div class="card col-12">
+        <br>
+        <h5 class="card-title">
+            <%= detail.name %>
+        </h5>
+        <div class="row">
+            <div class="image col-5">
+                <img class="  img-fluid img-thumbnail" style=" height:350px; object-fit:cover"
+                    src="<%= detail.image_URL %>" alt="No image">
+            </div>
+
+            <div class="col-7">
+                <ul class=" list-group ">
+                    <li class="list-group-item">Category:
+                        <%= detail.category %>
+                    </li>
+                    <li class="list-group-item">Style:
+                        <%= detail.style %>
+                    </li>
+                    <li class="list-group-item">Season:
+                        <%= detail.season %>
+                    </li>
+                    <li class="list-group-item">Temperature:
+                        <%= detail.temperature %>
+                    </li>
+                    <li class="list-group-item">Remark:
+                        <%= detail.remark %>
+                    </li>
+                    <li class="list-group-item">Wind:
+                        <%= detail.wind %>
+                    </li>
+                    <li class="list-group-item">Material:
+                        <%= detail.material %>
+                    </li>
+                    <li class="list-group-item">Color:
+                        <%= detail.color %>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <table>
+            <tr>
+                <td><a href="/item/update/<%= detail.id %>" class="btn btn-warning" role="button">Update</a></td>
+                <td><button type="button" class="btn btn-danger"
+                        onclick="deleteItem('<%= detail.id %>')">Delete</button>
+                </td>
+            </tr>
+            <tr><div id="deleteResult"></div></tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    async function deleteItem(id) {
+
+        var dr = document.getElementById("deleteResult");
+
+        var r = confirm("Confirm Delete?");
+        if (r == true) {
+
+            var response = await fetch("/item/" + id, {
+                method: "DELETE",
+                credentials: 'same-origin',
+            });
+
+            console.log(response);
+
+            if (response.status == 200) {
+                var data = await response.json();
+                dr.innerHTML = data;
+            } else {
+                dr.innerHTML = response.statusText;
+            }
+
+        } else {
+            dr.innerHTML = "cancelled";
+        }
+    };
+</script>

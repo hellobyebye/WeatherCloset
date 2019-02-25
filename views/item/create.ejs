@@ -1,4 +1,5 @@
 <!--create.ejs-->
+
 <form id="theForm" action="/item/create" method="POST">
     <div class="form-group">
         <label>Name</label>
@@ -25,9 +26,40 @@
         </select>
     </div>
     <div class="form-group">
+        <label>Season:</label>
+        <select class="form-control" name="Item[season]">
+            <option>Please pick one:</option>
+            <option>Spring</option>
+            <option>Summer</option>
+            <option>Autumn</option>
+            <option>Winter</option>
+        </select>
+    </div>
+    <div class="form-group">
         <label>Temperature:</label>
         <input type="number" class="form-control" name="Item[temperature]">
     </div>
+    <div class="form-group">
+        <label>Image URL:</label>
+        <input type="url" class="form-control" name="Item[image_URL]">
+    </div>
+    <div class="form-group">
+        <label>Remark:</label>
+        <textarea type="text" class="form-control" name="Item[remark]" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Wind:</label>
+        <input type="text" class="form-control" name="Item[wind]">
+    </div>
+    <div class="form-group">
+        <label>Material:</label>
+        <input type="text" class="form-control" name="Item[material]">
+    </div>
+    <div class="form-group">
+        <label>Color:</label>
+        <input type="text" class="form-control" name="Item[color]">
+    </div>
+    <br>
     <button type="submit" class="btn btn-primary">Create</button>
-    
+
 </form>

@@ -86,6 +86,8 @@ module.exports = {
         return res.ok('Operation completed.');
 
     },
+
+    //create new item, and add to user's closet
     create: async function (req, res) {
 
         if (req.method == "GET")
