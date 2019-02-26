@@ -39,35 +39,6 @@ module.exports = {
         }
     },
 
-    // action - allOutfits
-    allOutfits: async function (req, res) {
-
-        const qName = req.query.name || "";
-        const qStyle = req.query.style || "";
-        const qSeason = req.query.season || "";
-
-        var filtereditem = await Item.find({
-            where: {
-                name: {
-                    contains: qName,
-                },
-                style: {
-                    contains: qStyle,
-                },
-                season: {
-                    contains: qSeason,
-                },
-            },
-            sort: 'createdAt DESC'
-        });
-
-        if (req.wantsJSON) {
-            return res.json(filteredItem);
-        } else {
-            return res.view('item/allOutfits', { 'filteredItem': filteredItem });
-        }
-    },
-
     // action - detail
     detail: async function (req, res) {
 

@@ -1,22 +1,9 @@
-<!--create.ejs-->
+<!--createOutfit.ejs-->
 
-<form id="theForm" action="/item/create" method="POST">
+<form id="theForm" action="/outfit/createOutfit" method="POST">
     <div class="form-group">
         <label>Name</label>
         <input type="text" class="form-control" name="Item[name]" required>
-    </div>
-    <div class="form-group">
-        <label>Category:</label>
-        <select class="form-control" name="Item[category]">
-            <option>Please pick one:</option>
-            <option>Top</option>
-            <option>Button</option>
-            <option>Outwear</option>
-            <option>One-piece</option>
-            <option>Suit</option>
-            <option>Accessory</option>
-            <option>Others</option>
-        </select>
     </div>
     <div class="form-group">
         <label>Style:</label>
@@ -51,23 +38,7 @@
         <label>Remark:</label>
         <textarea type="text" class="form-control" name="Item[remark]" rows="3"></textarea>
     </div>
-    <div class="form-group">
-        <label>Wind:</label>
-        <select class="form-control" name="Item[wind]">
-            <option>Please pick one:</option>
-            <option>strong</option>
-            <option>medium</option>
-            <option>weak</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label>Material:</label>
-        <input type="text" class="form-control" name="Item[material]">
-    </div>
-    <div class="form-group">
-        <label>Color:</label>
-        <input type="text" class="form-control" name="Item[color]">
-    </div>
+    
     <br>
     <button type="submit" class="btn btn-primary">Create</button>
 

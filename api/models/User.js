@@ -52,6 +52,11 @@ module.exports = {
       via: 'userId'
     },
 
+    ownsOutfit: {
+      collection: 'Outfit',
+      via: 'userId'
+    },
+
   },
   customToJSON: function () {
     // Return a shallow copy of this record with the password removed.

@@ -46,16 +46,21 @@ module.exports.routes = {
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
 
   'GET /item/detail/:id': 'ItemController.detail',
+  'GET /outfit/detail/:id': 'OutfitController.detail',
 
   'GET /item/allItems': 'ItemController.allItems',
-  'GET /item/allOutfits': 'ItemController.allOutfits',
+  'GET /outfit/allOutfits': 'OutfitController.allOutfits',
 
   'POST /item/create': 'UserController.create',
+  'POST /outfit/createOutfit': 'UserController.createOutfit',
 
   'GET /item/update/:id': 'ItemController.update',
   'POST /item/update/:id': 'ItemController.update',
+  'GET /outfit/updateOutfit/:id': 'OutfitController.update',
+  'POST /outfit/updateOutfit/:id': 'OutfitController.update',
 
   'DELETE /item/:id': 'ItemController.delete',
+  'DELETE /outfit/:id': 'OutfitController.delete',
 
   '/item/populate': { view: '404' },
   '/user/populate': { view: '404' },

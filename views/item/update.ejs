@@ -14,9 +14,11 @@
                     <option>pick a new one:</option>
                     <option>Top</option>
                     <option>Button</option>
-                    <option>Coat</option>
-                    <option>Dress</option>
+                    <option>Outwear</option>
+                    <option>One-piece</option>
+                    <option>Suit</option>
                     <option>Accessory</option>
+                    <option>Others</option>
                 </select>
             </div>
             <div class="form-group">
@@ -24,9 +26,11 @@
                 <select class="form-control" name="Item[style]" value="<%= item.style %>">
                     <option><%= item.style %></option>
                     <option>pick a new one:</option>
-                    <option>Formal</option>
-                    <option>Casual</option>
+                    <option>Daily</option>
+                    <option>Work</option>
+                    <option>Sport</option>
                     <option>Holiday</option>
+                    <option>Formal</option>
                 </select>
             </div>
             <div class="form-group">
@@ -53,11 +57,17 @@
             </div>
             <div class="form-group">
                 <label>Remark:</label>
-                <textarea type="text" class="form-control" name="Item[remark]" rows="3" value="<%= item.remark %>"><%= item.remark %></textarea>
+                <textarea type="text" class="form-control" name="Item[remark]" rows="3"
+                    value="<%= item.remark %>"><%= item.remark %></textarea>
             </div>
             <div class="form-group">
                 <label>Wind:</label>
-                <input type="text" class="form-control" name="Item[wind]" value="<%= item.wind %>">
+                <select class="form-control" name="Item[wind]">
+                    <option>Please pick one:</option>
+                    <option>strong</option>
+                    <option>medium</option>
+                    <option>weak</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Material:</label>

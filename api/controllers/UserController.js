@@ -112,6 +112,31 @@ module.exports = {
         }
     },
 
+    //create new outfit, and add to user's closet
+    createOutfit: async function (req, res) {
+
+        if (req.method == "GET")
+            return res.view('outfit/create');
+
+        if (typeof req.body.Item === "undefined")
+            return res.badRequest("Form-data not received.");
+
+        if (!await User.findOne(req.session.userid)) return res.send("User not found");
+        var user = await User.findOne(req.session.userid);
+        
+        if (!req.body.Outfit) return res.send("Outfit not find");;
+        var outfit = req.body.Outfit;
+        outfit.userId = user.id;
+
+        await Outfit.create(outfit);
+
+        if (req.wantsJSON) {
+            return res.json(outfit);
+        } else {
+            return res.ok("Successfully created!");
+        }
+    },
+
     //remove item from my closet
     remove: async function (req, res) {
 

@@ -1,13 +1,13 @@
 <!--allOutfits.ejs-->
 
 
-<form action="/item/allOutfits" method="GET">
+<form action="/outfit/allOutfits" method="GET">
 
     <div class="row">
         <div class="col-xl-8 col-12">
             <div style="padding: 5px 15px">
                 <div class="row">
-                    <% filteredItem.forEach( function(model) { %>
+                    <% filteredOutfit.forEach( function(model) { %>
                     <div class="card col-xl-6 col-12">
                         <div class=" h-100">
                             <br>
@@ -36,9 +36,11 @@
                 <label>Style:</label>
                 <select class="form-control" name="style">
                     <option></option>
-                    <option>Formal</option>
-                    <option>Casual</option>
+                    <option>Daily</option>
+                    <option>Work</option>
+                    <option>Sport</option>
                     <option>Holiday</option>
+                    <option>Formal</option>
                 </select>
 
                 <label>Season:</label>
