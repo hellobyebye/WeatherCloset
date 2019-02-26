@@ -32,6 +32,9 @@ module.exports = {
             },
             sort: 'createdAt DESC'
         });
+        
+        return res.json(filtereditem);
+
         if (req.wantsJSON) {
             return res.json(filtereditem);
         } else {

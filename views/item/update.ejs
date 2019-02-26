@@ -11,7 +11,6 @@
                 <label>Category:</label>
                 <select class="form-control" name="Item[category]" value="<%= item.category %>">
                     <option><%= item.category %></option>
-                    <option>pick a new one:</option>
                     <option>Top</option>
                     <option>Button</option>
                     <option>Outwear</option>
@@ -25,7 +24,6 @@
                 <label>Style:</label>
                 <select class="form-control" name="Item[style]" value="<%= item.style %>">
                     <option><%= item.style %></option>
-                    <option>pick a new one:</option>
                     <option>Daily</option>
                     <option>Work</option>
                     <option>Sport</option>
@@ -37,7 +35,6 @@
                 <label>Season:</label>
                 <select class="form-control" name="Item[season]" value="<%= item.season %>">
                     <option><%= item.season %></option>
-                    <option>pick a new one:</option>
                     <option>Spring</option>
                     <option>Summer</option>
                     <option>Autumn</option>
@@ -63,7 +60,7 @@
             <div class="form-group">
                 <label>Wind:</label>
                 <select class="form-control" name="Item[wind]">
-                    <option>Please pick one:</option>
+                    <option><%= item.wind %></option>
                     <option>strong</option>
                     <option>medium</option>
                     <option>weak</option>
