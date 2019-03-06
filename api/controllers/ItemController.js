@@ -15,6 +15,8 @@ module.exports = {
         const qCategory = req.query.category || "";
         const qSeason = req.query.season || "";
 
+        console.log(req.body);
+
         var filtereditem = await Item.find({
             where: {
                 name: {
@@ -34,7 +36,34 @@ module.exports = {
         });
 
         if (req.wantsJSON) {
-            var model = await Item.find();
+            if (req.body != undefined) {
+                console.log("req.body exist: "+req.body);
+                const bName = req.body.name || "";
+                const bStyle = req.body.style || "";
+                const bCategory = req.body.category || "";
+                const bSeason = req.body.season || "";
+                var model = await Item.find({
+                    where: {
+                        name: {
+                            contains: bName,
+                        },
+                        style: {
+                            contains: bStyle,
+                        },
+                        category: {
+                            contains: bCategory,
+                        },
+                        season: {
+                            contains: bSeason,
+                        },
+                    },
+                    sort: 'createdAt DESC'
+                });
+            } else {
+                var model = await Item.find();
+            }
+        }
+        if (req.wantsJSON) {
             return res.json(model);
         } else {
             return res.view('item/allItems', { 'filteredItem': filtereditem });

@@ -30,7 +30,28 @@ module.exports = {
         });
 
         if (req.wantsJSON) {
-            return res.json(filteredO);
+            const bName = req.body.name || "";
+            const bStyle = req.body.style || "";
+            const bSeason = req.body.season || "";
+            var model = await Outfit.find({
+                where: {
+                    name: {
+                        contains: bName,
+                    },
+                    style: {
+                        contains: bStyle,
+                    },
+                    season: {
+                        contains: bSeason,
+                    },
+                },
+                sort: 'createdAt DESC'
+            });
+        }
+
+
+        if (req.wantsJSON) {
+            return res.json(model);
         } else {
             return res.view('outfit/allOutfits', { 'filteredOutfit': filteredO });
         }
