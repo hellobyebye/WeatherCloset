@@ -1,47 +1,43 @@
 <h1>hello</h1>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <% if (req.session.role == "user"){ %>
-          <div id="nav_home"><a class="nav-item nav-link active" href="/item/allItems">Items<span
-                class="sr-only">(current)</span></a></div>
-          <div id="nav_outfit"><a class="nav-item nav-link" href="/outfit/allOutfits">Outfits</a></div>
-          <div id="nav_create"><a class="nav-item nav-link" href="/user/create">Create</a></div>
-          <div id="nav_admin"><a class="nav-item nav-link disabled" href="/item/admin">Admin</a></div>
-          <div id="nav_registered"><a class="nav-item nav-link disabled" href="/user/myReg">My Registered Events</a>
-          </div>
-          <% } %>
-        </div>
-      </div>
+  
+<form action="/user/login" method="POST" onsubmit="submitForm(this);return false">
 
-      <style>
-        .login {
-          display: flex;
-          justify-content: space-between;
-          color: #808080
-        }
-      </style>
-      <div class="login disabled" style="float:right;">
-        <% if(req.session.username==undefined){ %>
-        <a href="/user/login">Login</a>
-        <% }else{ %>
-        <p>Hi, [
-          <%= req.session.username %>].&nbsp;&nbsp;</p>
-        (<a href="/user/logout">logout</a>)
-        <% } %>
-      </div>
-    </nav>
-
-
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">Weather Closet</h1>
-        <p class="lead">Manage your closet! Add your clothing items and outfits!</p>
-      </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">User name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username"
+            name="username">
     </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+
+<script>
+    async function submitForm(oFormElement) {
+
+        var response = await fetch(oFormElement.action, {
+            method: oFormElement.method,
+            credentials: 'same-origin',
+            body: new FormData(oFormElement),
+        });
+
+        console.log(response);
+
+        if (response.redirected) {
+            window.location = response.url;
+        } else if (response.status == 200) {
+            var data = await response.json();
+            alert(data);
+            location.reload(true);
+        } else if (response.status == 401) {
+            var data = await response.text();
+            alert(data);
+        } else {
+            alert(response.statusText);
+        }
+    };
+</script>
