@@ -1,1 +1,47 @@
 <h1>hello</h1>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <% if (req.session.role == "user"){ %>
+          <div id="nav_home"><a class="nav-item nav-link active" href="/item/allItems">Items<span
+                class="sr-only">(current)</span></a></div>
+          <div id="nav_outfit"><a class="nav-item nav-link" href="/outfit/allOutfits">Outfits</a></div>
+          <div id="nav_create"><a class="nav-item nav-link" href="/user/create">Create</a></div>
+          <div id="nav_admin"><a class="nav-item nav-link disabled" href="/item/admin">Admin</a></div>
+          <div id="nav_registered"><a class="nav-item nav-link disabled" href="/user/myReg">My Registered Events</a>
+          </div>
+          <% } %>
+        </div>
+      </div>
+
+      <style>
+        .login {
+          display: flex;
+          justify-content: space-between;
+          color: #808080
+        }
+      </style>
+      <div class="login disabled" style="float:right;">
+        <% if(req.session.username==undefined){ %>
+        <a href="/user/login">Login</a>
+        <% }else{ %>
+        <p>Hi, [
+          <%= req.session.username %>].&nbsp;&nbsp;</p>
+        (<a href="/user/logout">logout</a>)
+        <% } %>
+      </div>
+    </nav>
+
+
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Weather Closet</h1>
+        <p class="lead">Manage your closet! Add your clothing items and outfits!</p>
+      </div>
+    </div>
