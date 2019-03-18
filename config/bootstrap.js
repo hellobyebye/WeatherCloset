@@ -58,17 +58,20 @@ module.exports.bootstrap = async function (done) {
 
   const user = await User.findOne({ username: "user" });
   const userId = user.id;
+  const user2 = await User.findOne({ username: "user2" });
+  const user2Id = user2.id;
+
 
   await Item.createEach([
     {
-      name: "tshirt1", category: "top", style: "casual", remark: "This is a T-shirt",
+      name: "tshirt1", category: "top", style: "holiday", remark: "This is a T-shirt",
       image_URL: "https://res.cloudinary.com/teepublic/image/private/s--iIpdpqFc--/t_Resized%20Artwork/c_crop,x_10,y_10/c_fit,w_470/c_crop,g_north_west,h_626,w_470,x_0,y_0/g_north_west,u_upload:v1462829017:production:blanks:qe3008lhp5hquxmwp4a0,x_-395,y_-325/b_rgb:eeeeee/c_limit,f_auto,h_285,q_90,w_285/v1548276441/production/designs/4066543_0",
       temperature: "25", season: "summer", wind: "medium", material: "cotton", color: "white", userId: userId
     },
     {
-      name: "skirt1", category: "bottom", style: "casual", remark: "This is a skirt",
+      name: "skirt1", category: "bottom", style: "daily", remark: "This is a skirt",
       image_URL: "https://images-na.ssl-images-amazon.com/images/I/411RPnLvQBL._SX342_QL70_.jpg",
-      temperature: "25", season: "summer", wind: "weak", material: "cotton", color: "black", userId: userId
+      temperature: "25", season: "summer", wind: "weak", material: "cotton", color: "black", userId: user2Id
     },
   ]);
 

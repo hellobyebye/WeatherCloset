@@ -15,6 +15,9 @@ module.exports = {
         const qCategory = req.query.category || "";
         const qSeason = req.query.season || "";
 
+        const qUser = req.session.userid;
+        console.log(qUser);
+
         console.log(req.body);
 
         var filtereditem = await Item.find({
@@ -31,13 +34,15 @@ module.exports = {
                 season: {
                     contains: qSeason,
                 },
+                userId: qUser,
             },
             sort: 'createdAt DESC'
         });
+        console.log(filtereditem);
 
         if (req.wantsJSON) {
             if (req.body != undefined) {
-                console.log("req.body exist: "+req.body);
+                console.log("req.body exist: " + req.body);
                 const bName = req.body.name || "";
                 const bStyle = req.body.style || "";
                 const bCategory = req.body.category || "";
@@ -56,11 +61,12 @@ module.exports = {
                         season: {
                             contains: bSeason,
                         },
+                        userId: qUser,
                     },
                     sort: 'createdAt DESC'
                 });
             } else {
-                var model = await Item.find();
+                var model = await Item.find({ where: { userId: qUser } });
             }
         }
         if (req.wantsJSON) {
