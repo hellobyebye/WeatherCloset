@@ -1,0 +1,74 @@
+<h1>hello</h1>
+  
+<!-- allItems.ejs-->
+
+<form action="/item/allItems" method="GET">
+
+    <div class="row">
+        <div class="col-xl-8 col-12">
+            <div style="padding: 5px 15px">
+                <div class="row">
+                    <% filteredItem.forEach( function(model) { %>
+                    <div class="card col-xl-6 col-12">
+                        <div class=" h-100">
+                            <br>
+                            <div class="image">
+                                <img class="float-left img-fluid img-thumbnail"
+                                    style="width:50%; height:250px; object-fit:cover; margin-right:5px"
+                                    src="<%= model.image_URL %>" alt="No image">
+                            </div>
+                            <h5 class="card-title">
+                                <a href="/item/detail/<%= model.id %>">
+                                    <%= model.name %></a>
+                            </h5>
+                        </div>
+                    </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-12">
+            <div style="padding: 5px 15px">
+
+                <label>Name:</label>
+                <input type="text" class="form-control" name="name">
+
+                <label>Style:</label>
+                <select class="form-control" name="style">
+                    <option></option>
+                    <option>Daily</option>
+                    <option>Work</option>
+                    <option>Sport</option>
+                    <option>Holiday</option>
+                    <option>Formal</option>
+                </select>
+
+                <label>Category:</label>
+                <select class="form-control" name="category">
+                    <option></option>
+                    <option>Top</option>
+                    <option>Button</option>
+                    <option>Outwear</option>
+                    <option>One-piece</option>
+                    <option>Suit</option>
+                    <option>Accessory</option>
+                    <option>Others</option>
+                </select>
+
+                <label>Season:</label>
+                <select class="form-control" name="season">
+                    <option></option>
+                    <option>Spring</option>
+                    <option>Summer</option>
+                    <option>Autumn</option>
+                    <option>Winter</option>
+                </select>
+                <br>
+                <button type="submit" class="btn btn-primary">Search</button>
+
+            </div>
+
+        </div>
+    </div>
+</form>
