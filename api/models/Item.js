@@ -36,7 +36,8 @@ module.exports = {
     },
 
     image_URL: {
-      type: "string"
+      //type: "string"
+      type: "ref"
     },
 
     temperature: {
@@ -60,9 +61,9 @@ module.exports = {
       //required: true
     },
 
-    outfitId: {
-      model: 'outfit', //can be null
-    },
+    // outfitId: {
+    //   model: 'outfit', //can be null
+    // },
 
 
 
@@ -75,9 +76,9 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    inOutfit: {
+    in: {
       collection: 'Outfit',
-      via: 'itemId'
+      via: 'contains'
     },
 
   },

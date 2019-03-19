@@ -15,10 +15,11 @@ module.exports = {
         const qCategory = req.query.category || "";
         const qSeason = req.query.season || "";
 
-        const qUser = req.session.userid;
-        console.log(qUser);
+        const qUserid = req.session.userid;
+        
+        console.log("session: " + JSON.stringify(req.session));
 
-        console.log(req.body);
+        console.log("qUserid: " + qUserid);
 
         var filtereditem = await Item.find({
             where: {
@@ -34,19 +35,20 @@ module.exports = {
                 season: {
                     contains: qSeason,
                 },
-                userId: qUser,
+                userId: qUserid,
             },
             sort: 'createdAt DESC'
         });
-        console.log(filtereditem);
+        //console.log(filtereditem);
 
         if (req.wantsJSON) {
             if (req.body != undefined) {
-                console.log("req.body exist: " + req.body);
+                //console.log("req.body exist: " + JSON.stringify(req.body));
                 const bName = req.body.name || "";
                 const bStyle = req.body.style || "";
                 const bCategory = req.body.category || "";
                 const bSeason = req.body.season || "";
+                const bUserid = req.session.userid;
                 var model = await Item.find({
                     where: {
                         name: {
@@ -61,12 +63,12 @@ module.exports = {
                         season: {
                             contains: bSeason,
                         },
-                        userId: qUser,
+                        userId: bUserid,
                     },
                     sort: 'createdAt DESC'
                 });
             } else {
-                var model = await Item.find({ where: { userId: qUser } });
+                var model = await Item.find({ where: { userId: qUserid } });
             }
         }
         if (req.wantsJSON) {
@@ -95,6 +97,20 @@ module.exports = {
         }
 
     },
+
+    // // action - create
+    // create: async function (req, res) {
+
+    //     if (req.method == "GET")
+    //         return res.view('item/create');
+
+    //     if (typeof req.body.Event === "undefined")
+    //         return res.badRequest("Form-data not received.");
+
+    //     await Item.create(req.body.Item);
+
+    //     return res.ok("Successfully created!");
+    // },
 
     // action - update
     update: async function (req, res) {

@@ -11,10 +11,10 @@ module.exports = {
 
         if (req.method == "GET") return res.view('user/login');
 
-        if (!req.body.username) return res.badRequest();
+        if (!req.body.email) return res.badRequest();
         if (!req.body.password) return res.badRequest();
 
-        var user = await User.findOne({ username: req.body.username });
+        var user = await User.findOne({ email: req.body.email });
 
         if (!user) {
             res.status(401);
@@ -31,8 +31,8 @@ module.exports = {
 
             if (err) return res.serverError(err);
 
-            req.session.username = req.body.username;
-            req.session.role = user.role;
+            req.session.username = user.username;
+            req.session.email = user.email;
             req.session.userid = user.id;
 
             sails.log("Session: " + JSON.stringify(req.session));
@@ -96,12 +96,13 @@ module.exports = {
         if (typeof req.body.Item === "undefined")
             return res.badRequest("Form-data not received.");
 
-        if (!await User.findOne(req.session.userid)) return res.send("User not found");
-        var user = await User.findOne(req.session.userid);
-        
+        if (!await User.find({ where: { userId: req.session.userid } })) return res.send("User not found");
+        var user = await User.find({ where: { userId: req.session.userid } });
+
         if (!req.body.Item) return res.send("Item not find");;
         var item = req.body.Item;
         item.userId = user.id;
+        console.log("Item UserId: " + item.userId);
 
         await Item.create(item);
 
@@ -123,7 +124,7 @@ module.exports = {
 
         if (!await User.findOne(req.session.userid)) return res.send("User not found");
         var user = await User.findOne(req.session.userid);
-        
+
         if (!req.body.Outfit) return res.send("Outfit not find");;
         var outfit = req.body.Outfit;
         outfit.userId = user.id;
@@ -155,10 +156,10 @@ module.exports = {
     //My Closet Items
     myItems: async function (req, res) {
 
-        var myItems = await User.findOne(req.session.userid).populate('owns');
+        //var myItems = await User.findOne(req.session.userid).populate('owns');
 
         if (req.wantsJSON) {
-            return res.json(myItems.owns);
+            //return res.json(myItems.owns);
         } else {
             return res.view('user/myItems', { 'Items': myItems.owns });
         }

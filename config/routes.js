@@ -63,14 +63,14 @@ module.exports.routes = {
   'DELETE /outfit/:id': 'OutfitController.delete',
 
   '/item/populate': { view: '404' },
-  '/user/populate': { view: '404' },
-  '/user/add': { view: '404' },
-  '/user/remove': { view: '404' },
+  '/outfit/populate': { view: '404' },
+  '/item/add': { view: '404' },
+  '/item/remove': { view: '404' },
 
   '/item/:id/:association': 'ItemController.populate',
-  '/user/:id/:association': 'UserController.populate',
-  '/user/:id/:association/add/:fk': 'UserController.add',
-  '/user/:id/:association/remove/:fk': 'UserController.remove',
+  '/outfit/:id/:association': 'OutfitController.populate',
+  '/item/:id/:association/add/:fk': 'ItemController.add',
+  '/item/:id/:association/remove/:fk': 'ItemController.remove',
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗

@@ -44,10 +44,9 @@ module.exports = {
       //required: true
     },
 
-    itemId: {
-      model: 'item',  //must have
-      //required: true
-    },
+    // itemId: {
+    //   model: 'item', 
+    // },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -60,7 +59,7 @@ module.exports = {
 
     contains: {
       collection: 'Item',
-      via: 'outfitId'
+      via: 'in'
     },
 
   },

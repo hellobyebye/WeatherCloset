@@ -35,20 +35,17 @@ module.exports.bootstrap = async function (done) {
     if (opts.id && isNaN(parseInt(opts.id))) {
       return "Primary key specfied is invalid (incorrect type).";
     }
-
     if (opts.fk && isNaN(parseInt(opts.fk))) {
       return "Foreign key specfied is invalid (incorrect type).";
     }
-
     return null;        // falsy
-
   }
 
   const hash = await sails.bcrypt.hash('123456', saltRounds);
 
   await User.createEach([
-    { "username": "user", "password": hash, "role": "user", gender: "female", age: 22 },
-    { "username": "user2", "password": hash, "role": "user", gender: "male", age: 21 },
+    { "username": "user", "password": hash, "email": "user@gmail.com", gender: "female", age: 22 },
+    { "username": "user2", "password": hash, "email": "user2@gmail.com", gender: "male", age: 21 },
     // etc.
   ]);
 
@@ -60,7 +57,6 @@ module.exports.bootstrap = async function (done) {
   const userId = user.id;
   const user2 = await User.findOne({ username: "user2" });
   const user2Id = user2.id;
-
 
   await Item.createEach([
     {
@@ -74,10 +70,31 @@ module.exports.bootstrap = async function (done) {
       temperature: "25", season: "summer", wind: "weak", material: "cotton", color: "black", userId: user2Id
     },
   ]);
+  const tshirt1 = await Item.findOne({ name: "tshirt1" });
+  const skirt1 = await Item.findOne({ name: "skirt1" });
+
+  await Outfit.createEach([
+    {
+      oName: "outfit1", style: "holiday", remark: "This is a T-shirt",
+      image_URL: "https://cdn.shopify.com/s/files/1/2377/4733/products/Outfit_168__1400_2048x2048.jpg?v=1537227483",
+      temperature: "25", season: "summer", userId: userId
+    },
+    {
+      oName: "outfit2", style: "holiday", remark: "This is a T-shirt",
+      image_URL: "https://cdn.shopify.com/s/files/1/2377/4733/products/Outfit_Tienda_270_2048x2048.jpg?v=1552486994",
+      temperature: "25", season: "summer", userId: userId
+    },
+  ]);
+  const outfit1 = await Outfit.findOne({ oName: "outfit1" });
+  const outfit2 = await Outfit.findOne({ oName: "outfit2" });
 
 
-  // await User.addToCollection(user.id, 'owns').members(tshirt.id);
-  // await User.addToCollection(user.id, 'owns').members(skirt.id);
+
+  await Item.addToCollection(tshirt1.id, 'in').members(outfit1.id);
+  await Item.addToCollection(tshirt1.id, 'in').members(outfit2.id);
+
+  await Outfit.addToCollection(outfit1.id, 'contains').members(skirt1.id);
+  await Outfit.addToCollection(outfit1.id, 'contains').members(tshirt1.id);
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)

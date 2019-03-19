@@ -12,6 +12,12 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+   
+    email: {
+      type: 'string',
+      unique: true,
+      required: true
+    },
 
     username: {
       type: 'string',
@@ -24,17 +30,11 @@ module.exports = {
       required: true
     },
 
-    role: {
-      type: 'string',
-      enum: ['admin', 'user', 'everyone'],
-      defaultsTo: 'everyone'
-    },
-
     gender: {
       type: 'string',
     },
 
-    age:  {
+    age: {
       type: 'number',
     },
 
