@@ -1,0 +1,6 @@
+---
+applications:
+- name: cleo-weathercloset
+  host: cleo-weathercloset
+  memory: 256M
+  command: node app.js
