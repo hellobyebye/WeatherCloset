@@ -1,29 +1,27 @@
 <!-- allSizes.ejs-->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<input id="inp" type="button" class="btn btn-primary" value="Create New" onclick="location.href='create';" />
 
-<form action="/size/allSizes" method="GET">
 
-    <div class="row">
-        <div class="col-xl-8 col-12">
-            <div style="padding: 5px 15px">
-                <div class="row">
-                    <% sizes.forEach( function(model) { %>
-                    <div class="card col-xl-6 col-12">
-                        <div class=" h-100">
-                            <br>
+<table class="w3-table w3-striped">
+    <tr>
+        <td>
+            <p class="font-weight-bold">Type</p>
+        </td>
+        <td>
+            <p class="font-weight-bold">Size</p>
+        </td>
+    </tr>
+    <% sizes.forEach( function(model) { %>
+    <tr>
+        <td>
+            <%= model.sizeType %>
+        </td>
+        <td>
+            <!-- <a href="/event/detail/<%= model.id %>"> -->
+            <%= model.sizeData %></a>
+        </td>
 
-                            <h5 class="card-title">
-                                <!-- <a href="/item/detail/<%= model.id %>"> -->
-                                <%= model.sizeType %></a>
-                            </h5>
-                            <h5 class="card-title">
-                                <!-- <a href="/item/detail/<%= model.id %>"> -->
-                                <%= model.sizeData %></a>
-                            </h5>
-                        </div>
-                    </div>
-                    <% }); %>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+    </tr>
+    <% }); %>
+</table>
