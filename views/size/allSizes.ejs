@@ -1,0 +1,29 @@
+<!-- allSizes.ejs-->
+
+<form action="/size/allSizes" method="GET">
+
+    <div class="row">
+        <div class="col-xl-8 col-12">
+            <div style="padding: 5px 15px">
+                <div class="row">
+                    <% sizes.forEach( function(model) { %>
+                    <div class="card col-xl-6 col-12">
+                        <div class=" h-100">
+                            <br>
+
+                            <h5 class="card-title">
+                                <!-- <a href="/item/detail/<%= model.id %>"> -->
+                                <%= model.sizeType %></a>
+                            </h5>
+                            <h5 class="card-title">
+                                <!-- <a href="/item/detail/<%= model.id %>"> -->
+                                <%= model.sizeData %></a>
+                            </h5>
+                        </div>
+                    </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

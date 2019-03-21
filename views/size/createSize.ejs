@@ -1,0 +1,17 @@
+<!--createSize.ejs-->
+
+<form id="theForm" action="/size/createSize" method="POST">
+    <div class="form-group">
+        <label>Size Type:</label>
+        <input type="text" class="form-control" name="Size[sizeType]" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Size Data:</label>
+        <input type="text" class="form-control" name="Size[sizeData]">
+    </div>
+    
+    <br>
+    <button type="submit" class="btn btn-primary">Create</button>
+
+</form>

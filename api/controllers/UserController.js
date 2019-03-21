@@ -154,15 +154,15 @@ module.exports = {
 
     },
 
-    //My Closet Items
-    myItems: async function (req, res) {
+    //size
+    mySize: async function (req, res) {
 
-        //var myItems = await User.findOne(req.session.userid).populate('owns');
+        var mysizes = await User.findOne(req.session.userid).populate('owns');
 
         if (req.wantsJSON) {
             //return res.json(myItems.owns);
         } else {
-            return res.view('user/myItems', { 'Items': myItems.owns });
+            return res.view('user/mySize', { 'Sizes': mysizes});
         }
     },
 

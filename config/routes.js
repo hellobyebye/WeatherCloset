@@ -50,9 +50,11 @@ module.exports.routes = {
 
   'GET /item/allItems': 'ItemController.allItems',
   'GET /outfit/allOutfits': 'OutfitController.allOutfits',
+  'GET /size/allSizes': 'SizeController.allSizes',
 
   'POST /item/create': 'UserController.create',
   'POST /outfit/createOutfit': 'UserController.createOutfit',
+  'POST /size/createSize': 'SizeController.create',
 
   'GET /item/update/:id': 'ItemController.update',
   'POST /item/update/:id': 'ItemController.update',
