@@ -48,8 +48,7 @@ module.exports = {
     ***************************************************************************/
     default: {
       adapter: 'sails-mongo',
-      //url: 'mongodb://127.0.0.1:27017/ClosetDB',
-      url: 'process.env.mongohq-rigid-43308',
+      url: 'mongodb://127.0.0.1:27017/ClosetDB',
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
       //  ||   sensitive credentials like `url` using an environment variable.
@@ -61,15 +60,15 @@ module.exports = {
       //--------------------------------------------------------------------------
 
       /****************************************************************************
-      *                                                                           *
+      *                                                                           *
       * More adapter-specific options                                             *
-      *                                                                           *
+      *                                                                           *
       * > For example, for some hosted PostgreSQL providers (like Heroku), the    *
       * > extra `ssl: true` option is mandatory and must be provided.             *
-      *                                                                           *
-      * More info:                                                                *
-      * https://sailsjs.com/config/datastores                                     *
-      *                                                                           *
+      *                                                                           *
+      * More info:                                                                *
+      * https://sailsjs.com/config/datastores                                     *
+      *                                                                           *
       ****************************************************************************/
       // ssl: true,
 
@@ -185,8 +184,8 @@ module.exports = {
     * > (For a full list, see https://sailsjs.com/plugins/sessions)            *
     *                                                                          *
     ***************************************************************************/
-    adapter: '@sailshq/connect-redis',
-    url: 'redis://redistogo:f273abb023472ecdbf4ed652a1849690@spinyfin.redistogo.com:10970/',
+    // adapter: '@sailshq/connect-redis',
+    // url: 'redis://user:password@localhost:6379/databasenumber',
     //--------------------------------------------------------------------------
     // /\   OR, to avoid checking it in to version control, you might opt to
     // ||   set sensitive credentials like this using an environment variable.
@@ -222,7 +221,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     cookie: {
-      secure: true,
+      // secure: true,
       maxAge: 24 * 60 * 60 * 1000,  // 24 hours
     },
 
@@ -269,8 +268,8 @@ module.exports = {
     * (https://sailsjs.com/docs/concepts/deployment/scaling)                   *
     *                                                                          *
     ***************************************************************************/
-     adapter: '@sailshq/socket.io-redis',
-     url: 'redis://redistogo:f273abb023472ecdbf4ed652a1849690@spinyfin.redistogo.com:10970/',
+    // adapter: '@sailshq/socket.io-redis',
+    // url: 'redis://user:password@bigsquid.redistogo.com:9562/databasenumber',
     //--------------------------------------------------------------------------
     // /\   OR, to avoid checking it in to version control, you might opt to
     // ||   set sensitive credentials like this using an environment variable.
@@ -323,7 +322,7 @@ module.exports = {
     * (https://sailsjs.com/config/http)                                        *
     *                                                                          *
     ***************************************************************************/
-    trustProxy: true,
+    // trustProxy: true,
 
   },
 
