@@ -27,9 +27,6 @@ module.exports.bootstrap = async function (done) {
   // ]);
   // ```
 
-  sails.bcrypt = require('bcrypt');
-  const saltRounds = 10;
-
   sails.getInvalidIdMsg = function (opts) {
 
     if (opts.id && isNaN(parseInt(opts.id))) {
@@ -41,6 +38,8 @@ module.exports.bootstrap = async function (done) {
     return null;        // falsy
   }
 
+  sails.bcrypt = require('bcrypt');
+  const saltRounds = 10;
   const hash = await sails.bcrypt.hash('123456', saltRounds);
 
   await User.createEach([

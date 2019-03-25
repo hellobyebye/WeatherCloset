@@ -22,8 +22,10 @@ module.exports = {
         }
 
         const match = await sails.bcrypt.compare(req.body.password, user.password);
-        if (!match) {
-            res.status(401);
+        const match2 = await req.body.password === user.password;
+        console.log(match, "+", match2);
+        if (!match && !match2) {
+            res.status(403);
             return res.send("Wrong Password");
         }
 
@@ -50,11 +52,9 @@ module.exports = {
     logout: async function (req, res) {
 
         req.session.destroy(function (err) {
-
             if (err) return res.serverError(err);
 
             return res.ok("Log out successfully");
-
         });
     },
 
@@ -74,18 +74,18 @@ module.exports = {
 
     },
 
-    //add item to my closet
-    add: async function (req, res) {
+    // //add item to my closet
+    // add: async function (req, res) {
 
-        if (!await User.findOne(req.session.userid)) return res.notFound();
+    //     if (!await User.findOne(req.session.userid)) return res.notFound();
 
-        if (!await Item.findOne(parseInt(req.params.fk))) return res.notFound();
+    //     if (!await Item.findOne(parseInt(req.params.fk))) return res.notFound();
 
-        //await User.addToCollection(req.session.userid, 'owns').members(req.params.fk);
+    //     //await User.addToCollection(req.session.userid, 'owns').members(req.params.fk);
 
-        return res.ok('Operation completed.');
+    //     return res.ok('Operation completed.');
 
-    },
+    // },
 
     //create new user
     signup: async function (req, res) {
@@ -93,16 +93,18 @@ module.exports = {
         if (req.method == "GET")
             return res.view('user/signup');
 
-        console.log("req.body.User: " + JSON.stringify(req.body.User));
-
         if (typeof req.body.User === "undefined")
             return res.badRequest("Form-data not received.");
 
         if (!req.body.User) return res.send("User not find");
 
         var user = req.body.User;
+        sails.bcrypt = require('bcrypt');
+        const saltRounds = 10;
+        const hash = await sails.bcrypt.hash(user.password, saltRounds);
+        user.password = hash;
 
-        console.log("new user: " + user);
+        console.log("new user: " + JSON.stringify(user));
 
         await User.create(user);
 
@@ -166,20 +168,20 @@ module.exports = {
         }
     },
 
-    //remove item from my closet
-    remove: async function (req, res) {
+    // //remove item from my closet
+    // remove: async function (req, res) {
 
-        const message = sails.getInvalidIdMsg(req.params);
+    //     const message = sails.getInvalidIdMsg(req.params);
 
-        if (message) return res.badRequest(message);
+    //     if (message) return res.badRequest(message);
 
-        if (!await User.findOne(req.session.userid)) return res.notFound();
+    //     if (!await User.findOne(req.session.userid)) return res.notFound();
 
-        await User.removeFromCollection(req.session.userid, 'owns').members(req.params.fk);
+    //     await User.removeFromCollection(req.session.userid, 'owns').members(req.params.fk);
 
-        return res.ok('Operation completed.');
+    //     return res.ok('Operation completed.');
 
-    },
+    // },
 
     //size
     mySize: async function (req, res) {
@@ -190,6 +192,54 @@ module.exports = {
             //return res.json(myItems.owns);
         } else {
             return res.view('user/mySize', { 'Sizes': mysizes });
+        }
+    },
+
+    // show user profile
+    myProfile: async function (req, res) {
+
+        var user = await User.find({ where: { id: req.session.userid } });
+        //console.log("current user: "+ JSON.stringify(user));
+
+        if (req.wantsJSON) {
+            return res.json(user);
+        } else {
+            //return res.view('user/mySize', { 'Sizes': mysizes });
+        }
+    },
+
+    // update user profile
+    updateProfile: async function (req, res) {
+
+        if (req.method == "GET") {
+
+            var model = await User.findOne(req.params.id);
+
+            if (!model) return res.notFound();
+
+            return res.view('user/updateProfile', { 'user': model });
+
+        } else {
+
+            if (typeof req.body.User === "undefined")
+                return res.badRequest("Form-data not received.");
+
+            var models = await User.update(req.session.userid).set({
+                username: req.body.User.username || req.session.username,
+                email: req.body.User.email || req.session.email,
+                age: req.body.User.age,
+                gender: req.body.User.gender,
+            }).fetch();
+
+            console.log("updat user id: " + JSON.stringify(req.session.userid));
+            console.log("updated user: " + JSON.stringify(models));
+
+            if (models.length == 0) return res.notFound();
+
+            if (req.wantsJSON) {
+                return res.json(models);
+            }
+
         }
     },
 

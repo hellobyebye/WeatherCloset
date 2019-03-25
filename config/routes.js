@@ -47,6 +47,8 @@ module.exports.routes = {
 
   'POST /user/signup': 'UserController.signup',
 
+  'GET /user/myProfile': 'UserController.myProfile',
+
   'GET /item/detail/:id': 'ItemController.detail',
   'GET /outfit/detail/:id': 'OutfitController.detail',
 
@@ -62,6 +64,8 @@ module.exports.routes = {
   'POST /item/update/:id': 'ItemController.update',
   'GET /outfit/updateOutfit/:id': 'OutfitController.update',
   'POST /outfit/updateOutfit/:id': 'OutfitController.update',
+  'GET /user/updateProfile': 'UserController.updateProfile',
+  'POST /user/updateProfile': 'UserController.updateProfile',
 
   'DELETE /item/:id': 'ItemController.delete',
   'DELETE /outfit/:id': 'OutfitController.delete',
