@@ -45,6 +45,8 @@ module.exports.routes = {
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
 
+  'POST /user/signup': 'UserController.signup',
+
   'GET /item/detail/:id': 'ItemController.detail',
   'GET /outfit/detail/:id': 'OutfitController.detail',
 

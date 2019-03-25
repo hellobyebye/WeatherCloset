@@ -15,7 +15,7 @@ module.exports = {
 
     name: {
       type: "string",
-      unique: true,
+      unique: true,   //name is the primary key
       required: true
     },
 

@@ -87,6 +87,33 @@ module.exports = {
 
     },
 
+    //create new user
+    signup: async function (req, res) {
+
+        if (req.method == "GET")
+            return res.view('user/signup');
+
+        console.log("req.body.User: " + JSON.stringify(req.body.User));
+
+        if (typeof req.body.User === "undefined")
+            return res.badRequest("Form-data not received.");
+
+        if (!req.body.User) return res.send("User not find");
+
+        var user = req.body.User;
+
+        console.log("new user: " + user);
+
+        await User.create(user);
+
+        if (req.wantsJSON) {
+            return res.json(user);
+        } else {
+            return res.ok("Successfully created!");
+        }
+
+    },
+
     //create new item, and add to user's closet
     create: async function (req, res) {
 
@@ -162,7 +189,7 @@ module.exports = {
         if (req.wantsJSON) {
             //return res.json(myItems.owns);
         } else {
-            return res.view('user/mySize', { 'Sizes': mysizes});
+            return res.view('user/mySize', { 'Sizes': mysizes });
         }
     },
 

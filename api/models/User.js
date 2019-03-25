@@ -16,12 +16,11 @@ module.exports = {
     email: {
       type: 'string',
       unique: true,
-      required: true
+      required: true  //email is the primary key
     },
 
     username: {
       type: 'string',
-      unique: true,
       required: true
     },
 
