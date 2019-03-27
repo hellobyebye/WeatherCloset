@@ -69,6 +69,7 @@ module.exports.routes = {
 
   'DELETE /item/:id': 'ItemController.delete',
   'DELETE /outfit/:id': 'OutfitController.delete',
+  'DELETE /size/:id': 'SizeController.delete',
 
   '/item/populate': { view: '404' },
   '/outfit/populate': { view: '404' },

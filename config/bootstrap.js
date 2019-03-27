@@ -87,6 +87,13 @@ module.exports.bootstrap = async function (done) {
   const outfit1 = await Outfit.findOne({ oName: "outfit1" });
   const outfit2 = await Outfit.findOne({ oName: "outfit2" });
 
+  await Size.createEach([
+    {
+      sizeType: "shoes", sizeData: "38", userId: userId
+    }, {
+      sizeType: "shoulder", sizeData: "40", userId: userId
+    },
+  ]);
 
 
   await Item.addToCollection(tshirt1.id, 'in').members(outfit1.id);
