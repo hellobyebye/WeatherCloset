@@ -64,6 +64,36 @@ module.exports.bootstrap = async function (done) {
       temperature: "25", season: "summer", wind: "medium", material: "cotton", color: "white", userId: userId
     },
     {
+      name: "bottom1", category: "bottom", style: "holiday", remark: "This is a shorts",
+      image_URL: "https://factory.jcrew.com/s7-img-facade/E8819_DM1256",
+      temperature: "25", season: "summer", wind: "medium", material: "denim", color: "white", userId: userId
+    },
+    {
+      name: "tshirt2", category: "top", style: "daily", remark: "This is a pink T-shirt",
+      image_URL: "https://cdn.shopify.com/s/files/1/1285/7087/products/LOST_IN_JAPAN_launching_5.18_b171bbcc-3eb1-40c8-acb7-ddc8a26d06ed_1024x1024.png?v=1527262491",
+      temperature: "25", season: "summer", wind: "medium", material: "cotton", color: "pink", userId: userId
+    },
+    {
+      name: "tshirt3", category: "top", style: "daily", remark: "This is a black T-shirt",
+      image_URL: "https://cdn.shopify.com/s/files/1/2029/4253/products/Damb_Back_2a3cc4cc-06c2-488e-8918-2e7a1cde3dfc_530x@2x.jpg?v=1503962227",
+      temperature: "25", season: "summer", wind: "medium", material: "cotton", color: "black", userId: userId
+    },
+    {
+      name: "suit1", category: "suit", style: "work", remark: "This is a suit",
+      image_URL: "https://i1.adis.ws/i/tom_ford/21Y74V-411R47_NVY_APPENDGRID?$listing_grid$",
+      temperature: "25", season: "", wind: "medium", material: "", color: "black", userId: userId
+    },
+    {
+      name: "red skirt", category: "bottom", style: "daily", remark: "This is a red skirt",
+      image_URL: "https://www.dancinginthestreet.com/imagecache/c8353be8-3cb9-4e9e-936c-a723008ae655_800x800.jpg",
+      temperature: "25", season: "summer", wind: "weak", material: "cotton", color: "red", userId: userId
+    },
+    {
+      name: "plaid skirt", category: "bottom", style: "daily", remark: "This is a yellow plaid skirt",
+      image_URL: "https://m.media-amazon.com/images/I/91D149WZJNL._SR500,500_.jpg",
+      temperature: "25", season: "summer", wind: "weak", material: "cotton", color: "plaid, yellow", userId: userId
+    },
+    {
       name: "skirt1", category: "bottom", style: "daily", remark: "This is a skirt",
       image_URL: "https://images-na.ssl-images-amazon.com/images/I/411RPnLvQBL._SX342_QL70_.jpg",
       temperature: "25", season: "summer", wind: "weak", material: "cotton", color: "black", userId: user2Id

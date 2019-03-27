@@ -16,7 +16,7 @@ module.exports = {
         const qSeason = req.query.season || "";
 
         const qUserid = req.session.userid;
-        
+
         console.log("session: " + JSON.stringify(req.session));
 
         console.log("qUserid: " + qUserid);
@@ -184,5 +184,15 @@ module.exports = {
         return res.json(model);
     },
 
+    // return item count
+    itemCount: async function (req, res) {
+
+        const bUserid = req.session.userid;
+        var model = await Item.find({ where: { userId: bUserid } });
+
+        return res.json(model.length);
+    },
+
+    
 };
 
