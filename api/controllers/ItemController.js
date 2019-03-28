@@ -192,7 +192,25 @@ module.exports = {
 
         return res.json(model.length);
     },
+    // different categories count
+    categoryStat: async function (req, res) {
 
-    
+        const bUserid = req.session.userid;
+
+        var model = [];
+        var top = await Item.find({ where: { userId: bUserid, category: "top" } });
+        var bottom = await Item.find({ where: { userId: bUserid, category: "bottom" } });
+        var outwear = await Item.find({ where: { userId: bUserid, category: "outwear" } });
+        var oneP = await Item.find({ where: { userId: bUserid, category: "one-piece" } });
+        var suit = await Item.find({ where: { userId: bUserid, category: "suit" } });
+        var accessory = await Item.find({ where: { userId: bUserid, category: "accessory" } });
+        var others = await Item.find({ where: { userId: bUserid, category: "others" } });
+        model = [top.length, bottom.length, outwear.length, oneP.length, suit.length, accessory.length, others.length]
+
+        return res.json(model);
+    },
+
+
+
 };
 

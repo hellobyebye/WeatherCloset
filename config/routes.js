@@ -72,6 +72,8 @@ module.exports.routes = {
   'DELETE /size/:id': 'SizeController.delete',
 
   'GET /item/itemCount': 'ItemController.itemCount',
+  'GET /item/categoryStat': 'ItemController.categoryStat',
+  'GET /outfit/outfitCount': 'OutfitController.outfitCount',
 
   '/item/populate': { view: '404' },
   '/outfit/populate': { view: '404' },

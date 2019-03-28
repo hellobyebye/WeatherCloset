@@ -144,5 +144,14 @@ module.exports = {
         return res.json(model);
     },
 
+     // return outfit count
+     outfitCount: async function (req, res) {
+
+        const bUserid = req.session.userid;
+        var model = await Outfit.find({ where: { userId: bUserid } });
+
+        return res.json(model.length);
+    },
+
 };
 
