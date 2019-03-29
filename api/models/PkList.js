@@ -1,5 +1,5 @@
 /**
- * Item.js
+ * PkList.js
  *
  * @description :: A model definition.  Represents a database table/collection/etc.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -13,59 +13,19 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    name: {
+    listName: {
       type: "string",
-      unique: true,   //name is the primary key
       required: true
     },
 
-    category: {
-      type: "string" //top, bottom, coat 
-    },
-
-    style: {
-      type: "string" //formal, casual
-    },
-
-    season: {
-      type: "string"//winter
-    },
-
-    remark: {
+    destination: {
       type: "string"
-    },
-
-    image_URL: {
-      //type: "string"
-      type: "ref"
-    },
-
-    temperature: {
-      type: "number" //degree
-    },
-
-    wind: {
-      type: "string"//strong, medium, weak
-    },
-
-    material: {
-      type: "string" //cotton
-    },
-
-    color: {
-      type: "string"//red
     },
 
     userId: {
       model: 'user', //must have
       //required: true
     },
-
-    // outfitId: {
-    //   model: 'outfit', //can be null
-    // },
-
-
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -76,14 +36,14 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    in: {
-      collection: 'Outfit',
-      via: 'contains'
+    hasItem: {
+      collection: 'Item',
+      via: 'inPkList'
     },
 
-    inPkList: {
-      collection: 'Pklist',
-      via: 'hasItem'
+    hasOutfit: {
+      collection: 'Outfit',
+      via: 'inPkList'
     },
 
   },
@@ -91,10 +51,11 @@ module.exports = {
   getInvalidIdMsg: function (opts) {
 
     if (typeof opts.id === "undefined" || isNaN(parseInt(opts.id)))
-      return "Item not specified or with incorrect type.";
+      return "Packing list not specified or with incorrect type.";
 
     return null;        // falsy
 
   },
+
 };
 

@@ -44,10 +44,6 @@ module.exports = {
       //required: true
     },
 
-    // itemId: {
-    //   model: 'item', 
-    // },
-
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
@@ -60,6 +56,11 @@ module.exports = {
     contains: {
       collection: 'Item',
       via: 'in'
+    },
+
+    inPkList: {
+      collection: 'Pklist',
+      via: 'hasOutfit'
     },
 
   },
