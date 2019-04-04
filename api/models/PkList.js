@@ -22,6 +22,10 @@ module.exports = {
       type: "string"
     },
 
+    remark: {
+      type: "string"
+    },
+
     userId: {
       model: 'user', //must have
       //required: true

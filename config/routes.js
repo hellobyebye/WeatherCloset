@@ -56,9 +56,16 @@ module.exports.routes = {
   'GET /outfit/allOutfits': 'OutfitController.allOutfits',
   'GET /size/allSizes': 'SizeController.allSizes',
 
+  'GET /item/returnItems': 'ItemController.returnItems',
+  'POST /item/returnItems': 'ItemController.returnItems',
+  'GET /outfit/returnOutfit': 'OutfitController.returnOutfit',
+  'POST /outfit/returnOutfit': 'OutfitController.returnOutfit',
+  
+
   'POST /item/create': 'UserController.create',
   'POST /outfit/createOutfit': 'UserController.createOutfit',
   'POST /size/createSize': 'SizeController.create',
+  'POST /pkList/createList': 'PkListController.createList',
 
   'GET /item/update/:id': 'ItemController.update',
   'POST /item/update/:id': 'ItemController.update',
@@ -66,6 +73,9 @@ module.exports.routes = {
   'POST /outfit/updateOutfit/:id': 'OutfitController.update',
   'GET /user/updateProfile': 'UserController.updateProfile',
   'POST /user/updateProfile': 'UserController.updateProfile',
+
+  'GET /item/setStatus/:id': 'ItemController.setStatus',
+  'POST /item/setStatus/:id': 'ItemController.setStatus',
 
   'DELETE /item/:id': 'ItemController.delete',
   'DELETE /outfit/:id': 'OutfitController.delete',
@@ -84,6 +94,9 @@ module.exports.routes = {
   '/outfit/:id/:association': 'OutfitController.populate',
   '/item/:id/:association/add/:fk': 'ItemController.add',
   '/item/:id/:association/remove/:fk': 'ItemController.remove',
+
+  '/pkList/:id/:association/add/:fk': 'PkListController.add',
+  
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗

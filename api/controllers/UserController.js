@@ -131,7 +131,8 @@ module.exports = {
         if (!req.body.Item) return res.send("Item not find");;
         var item = req.body.Item;
         item.userId = req.session.userid;
-        console.log("session userid: " + req.session.userid);
+        item.status = true;
+        console.log("item.status: " + item.status);
         console.log("Item.userId: " + item.userId);
 
         await Item.create(item);
@@ -149,15 +150,14 @@ module.exports = {
         if (req.method == "GET")
             return res.view('outfit/create');
 
-        if (typeof req.body.Item === "undefined")
+        if (typeof req.body.Outfit === "undefined")
             return res.badRequest("Form-data not received.");
 
-        if (!await User.findOne(req.session.userid)) return res.send("User not found");
-        var user = await User.findOne(req.session.userid);
+        if (!await User.find({ where: { userId: req.session.userid } })) return res.send("User not found");
 
-        if (!req.body.Outfit) return res.send("Outfit not find");;
+        if (!req.body.Outfit) return res.send("Outfit not find");
         var outfit = req.body.Outfit;
-        outfit.userId = user.id;
+        outfit.userId = req.session.userid;
 
         await Outfit.create(outfit);
 

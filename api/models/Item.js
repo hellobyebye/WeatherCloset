@@ -36,12 +36,13 @@ module.exports = {
     },
 
     image_URL: {
-      //type: "string"
-      type: "ref"
+      type: "string"
+      //type: "ref"
     },
 
     temperature: {
-      type: "number" //degree
+      type: "number", //degree
+      allowNull: true,
     },
 
     wind: {
@@ -54,6 +55,10 @@ module.exports = {
 
     color: {
       type: "string"//red
+    },
+
+    status: {
+      type: "boolean"//true: item is available
     },
 
     userId: {

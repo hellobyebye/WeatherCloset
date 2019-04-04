@@ -72,6 +72,7 @@ module.exports = {
             }
         }
         if (req.wantsJSON) {
+            console.log("allItems: " + JSON.stringify(model));
             return res.json(model);
         } else {
             return res.view('item/allItems', { 'filteredItem': filtereditem });
@@ -97,20 +98,6 @@ module.exports = {
         }
 
     },
-
-    // // action - create
-    // create: async function (req, res) {
-
-    //     if (req.method == "GET")
-    //         return res.view('item/create');
-
-    //     if (typeof req.body.Event === "undefined")
-    //         return res.badRequest("Form-data not received.");
-
-    //     await Item.create(req.body.Item);
-
-    //     return res.ok("Successfully created!");
-    // },
 
     // action - update
     update: async function (req, res) {
@@ -182,6 +169,63 @@ module.exports = {
         if (!model) return res.notFound();
 
         return res.json(model);
+    },
+
+    //add item to outfit
+    add: async function (req, res) {
+
+        if (!await Item.findOne(req.params.id)) return res.notFound();
+
+        if (!await Outfit.findOne(req.params.fk)) return res.notFound();
+
+        await Item.addToCollection(req.params.id, 'in').members(req.params.fk);
+
+        console.log("req.params.id: " + req.params.id)
+        console.log("req.params.fk: " + req.params.fk)
+        console.log("okk")
+
+        return res.ok('Operation completed.');
+    },
+
+    // action - return the selected Items 
+    returnItems: async function (req, res) {
+
+        const qIDs = req.body.itemid || "";  //array of selected itemid
+        console.log("req.body.itemid: " + JSON.stringify(req.body.itemid))
+
+        var model = [];
+
+        for (const qid of qIDs) {
+            var item = await Item.find({ where: { id: qid } });
+            //console.log("item: " + JSON.stringify(item))
+            console.log("item[0]: " + JSON.stringify(item[0]))
+            model.push(item[0]);
+            console.log("model after push: " + JSON.stringify(model))
+        }
+
+        console.log("model before return: " + JSON.stringify(model))
+
+        return res.json(model);
+    },
+
+    // action - set item status
+    setStatus: async function (req, res) {
+
+        var message = Item.getInvalidIdMsg(req.params);
+
+        if (message) return res.badRequest(message);
+
+        if (typeof req.body === "undefined")
+            return res.badRequest("Form-data not received.");
+
+        var models = await Item.update(req.params.id).set({
+            status: req.body.status,          
+        }).fetch();
+
+        if (models.length == 0) return res.notFound();
+
+        return res.json(models);
+
     },
 
     // return item count
