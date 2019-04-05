@@ -10,47 +10,34 @@ module.exports = {
     // action - allOutfits
     allOutfits: async function (req, res) {
 
-        const qName = req.query.name || "";
-        const qStyle = req.query.style || "";
-        const qSeason = req.query.season || "";
-
-        var filteredO = await Outfit.find({
-            where: {
-                name: {
-                    contains: qName,
-                },
-                style: {
-                    contains: qStyle,
-                },
-                season: {
-                    contains: qSeason,
-                },
-            },
-            sort: 'createdAt DESC'
-        });
-
         if (req.wantsJSON) {
-            const bName = req.body.name || "";
-            const bStyle = req.body.style || "";
-            const bSeason = req.body.season || "";
-            var model = await Outfit.find({
-                where: {
-                    name: {
-                        contains: bName,
+            if (req.body != undefined) {
+                const bName = req.body.name || "";
+                const bStyle = req.body.style || "";
+                const bSeason = req.body.season || "";
+                const bUserid = req.session.userid;
+                var model = await Outfit.find({
+                    where: {
+                        name: {
+                            contains: bName,
+                        },
+                        style: {
+                            contains: bStyle,
+                        },
+                        season: {
+                            contains: bSeason,
+                        },
+                        userId: bUserid,
                     },
-                    style: {
-                        contains: bStyle,
-                    },
-                    season: {
-                        contains: bSeason,
-                    },
-                },
-                sort: 'createdAt DESC'
-            });
+                    sort: 'createdAt DESC'
+                })
+            } else {
+                var model = await Outfit.find({ where: { userId: bUserid } });
+            }
         }
 
-
         if (req.wantsJSON) {
+            //console.log("allOutfits: " + JSON.stringify(model));
             return res.json(model);
         } else {
             return res.view('outfit/allOutfits', { 'filteredOutfit': filteredO });
@@ -141,6 +128,7 @@ module.exports = {
 
         if (!model) return res.notFound();
 
+        console.log("populate: "+ JSON.stringify(model));
         return res.json(model);
     },
 
@@ -150,11 +138,11 @@ module.exports = {
         const bUserid = req.session.userid;
         const bOName = req.body.oName;
 
-        console.log("bOName: "+bOName)
+        console.log("bOName: " + bOName)
 
         var model = await Outfit.find({ where: { oName: bOName } });//userId: bUserid,
 
-        console.log("model: "+JSON.stringify(model))
+        console.log("model: " + JSON.stringify(model))
         return res.json(model);
     },
 

@@ -72,7 +72,6 @@ module.exports = {
             }
         }
         if (req.wantsJSON) {
-            console.log("allItems: " + JSON.stringify(model));
             return res.json(model);
         } else {
             return res.view('item/allItems', { 'filteredItem': filtereditem });
