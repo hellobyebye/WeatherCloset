@@ -12,13 +12,13 @@ module.exports = {
 
         if (req.wantsJSON) {
             if (req.body != undefined) {
-                const bName = req.body.name || "";
+                const bName = req.body.oName || "";
                 const bStyle = req.body.style || "";
                 const bSeason = req.body.season || "";
                 const bUserid = req.session.userid;
                 var model = await Outfit.find({
                     where: {
-                        name: {
+                        oName: {
                             contains: bName,
                         },
                         style: {
