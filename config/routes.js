@@ -104,6 +104,8 @@ module.exports.routes = {
   '/item/:id/:association/add/:fk': 'ItemController.add',
   '/item/:id/:association/remove/:fk': 'ItemController.remove',
 
+  '/item/:id/:association/addToPkList/:fk': 'ItemController.addToPkList',
+
   '/pkList/:id/:association/add/:fk': 'PkListController.add',
   
 

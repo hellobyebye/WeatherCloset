@@ -49,6 +49,7 @@ module.exports = {
         });
 
     },
+
     logout: async function (req, res) {
 
         req.session.destroy(function (err) {
@@ -201,11 +202,8 @@ module.exports = {
         var user = await User.find({ where: { id: req.session.userid } });
         //console.log("current user: "+ JSON.stringify(user));
 
-        if (req.wantsJSON) {
-            return res.json(user);
-        } else {
-            //return res.view('user/mySize', { 'Sizes': mysizes });
-        }
+        return res.json(user);
+
     },
 
     // update user profile

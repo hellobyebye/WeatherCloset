@@ -187,7 +187,7 @@ module.exports = {
     },
 
     //add item to packing list
-    add: async function (req, res) {
+    addToPkList: async function (req, res) {
 
         if (!await Item.findOne(req.params.id)) return res.notFound();
 
