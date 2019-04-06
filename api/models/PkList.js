@@ -15,7 +15,8 @@ module.exports = {
 
     listName: {
       type: "string",
-      required: true
+      required: true,
+      unique: true, 
     },
 
     destination: {

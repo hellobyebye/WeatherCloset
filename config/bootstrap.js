@@ -101,21 +101,29 @@ module.exports.bootstrap = async function (done) {
   ]);
   const tshirt1 = await Item.findOne({ name: "tshirt1" });
   const skirt1 = await Item.findOne({ name: "skirt1" });
+  const tshirt2 = await Item.findOne({ name: "tshirt2" });
+  const skirt2 = await Item.findOne({ name: "plaid skirt" });
 
   await Outfit.createEach([
     {
-      oName: "outfit1", style: "holiday", remark: "This is a T-shirt",
-      image_URL: "https://cdn.shopify.com/s/files/1/2377/4733/products/Outfit_168__1400_2048x2048.jpg?v=1537227483",
+      oName: "outfit1", style: "holiday", remark: "This is outfit No.1",
+      image_URL: "data:image/jpeg;base64,undefined",
       temperature: "25", season: "summer", userId: userId
     },
     {
-      oName: "outfit2", style: "holiday", remark: "This is a T-shirt",
+      oName: "outfit2", style: "holiday", remark: "This is outfit two. Selected from current items",
+      image_URL: "data:image/jpeg;base64,undefined",
+      temperature: "25", season: "summer", userId: userId
+    },
+    {
+      oName: "outfit3", style: "holiday", remark: "This is an outfit with a image",
       image_URL: "https://cdn.shopify.com/s/files/1/2377/4733/products/Outfit_Tienda_270_2048x2048.jpg?v=1552486994",
       temperature: "25", season: "summer", userId: userId
     },
   ]);
   const outfit1 = await Outfit.findOne({ oName: "outfit1" });
   const outfit2 = await Outfit.findOne({ oName: "outfit2" });
+  const outfit3 = await Outfit.findOne({ oName: "outfit3" });
 
   await Size.createEach([
     {
@@ -125,12 +133,30 @@ module.exports.bootstrap = async function (done) {
     },
   ]);
 
+  await PkList.createEach([
+    {
+      listName: "Jeju trip", destination: "Jeju", remark: "Four days three nights!", userId: userId
+    }, {
+      listName: "Japan go go", destination: "Tokyo", remark: "7 days", userId: userId
+    },
+  ]);
+  const pkList1 = await PkList.findOne({ listName: "Jeju trip" });
+  const pkList2 = await PkList.findOne({ listName: "Japan go go" });
+
 
   await Item.addToCollection(tshirt1.id, 'in').members(outfit1.id);
+  await Item.addToCollection(skirt1.id, 'in').members(outfit1.id);
   await Item.addToCollection(tshirt1.id, 'in').members(outfit2.id);
+  await Item.addToCollection(skirt2.id, 'in').members(outfit2.id);
 
-  await Outfit.addToCollection(outfit1.id, 'contains').members(skirt1.id);
-  await Outfit.addToCollection(outfit1.id, 'contains').members(tshirt1.id);
+
+  await Item.addToCollection(tshirt1.id, 'inPkList').members(pkList1.id);
+  await Item.addToCollection(skirt1.id, 'inPkList').members(pkList1.id);
+  await Item.addToCollection(tshirt2.id, 'inPkList').members(pkList1.id);
+  await Item.addToCollection(skirt2.id, 'inPkList').members(pkList1.id);
+  await Item.addToCollection(tshirt1.id, 'inPkList').members(pkList2.id);
+  await Item.addToCollection(tshirt2.id, 'inPkList').members(pkList2.id);
+  await Item.addToCollection(skirt2.id, 'inPkList').members(pkList2.id);
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)

@@ -12,12 +12,26 @@ module.exports = {
 
         const qUserid = req.session.userid;
 
-        var model = await PkList.find({
-            where: {
-                userId: qUserid,
-            },
-            sort: 'createdAt DESC'
-        });
+        if (req.body != undefined) {
+            
+            const bName = req.body.listName || "";
+            const bUserid = req.session.userid;
+
+            var model = await PkList.find({
+                where: {
+                    name: {
+                        contains: bName,
+                    },
+                    userId: bUserid,
+                },
+                sort: 'createdAt DESC'
+            });
+        } else {
+            var model = await PkList.find({
+                where: { userId: qUserid, },
+                sort: 'createdAt DESC'
+            });
+        }
 
         return res.json(model);
 
@@ -116,7 +130,7 @@ module.exports = {
 
         var model = await PkList.find({ where: { listName: bListName } });//userId: bUserid,
 
-        console.log("model: " + JSON.stringify(model))
+        //console.log("model: " + JSON.stringify(model))
         return res.json(model);
     },
 
@@ -149,7 +163,7 @@ module.exports = {
 
         if (!model) return res.notFound();
 
-        console.log("pkList populate: " + JSON.stringify(model));
+        console.log(JSON.stringify(model) + "pkList populate");
         return res.json(model);
     },
 
