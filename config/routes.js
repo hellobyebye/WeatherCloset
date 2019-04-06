@@ -51,6 +51,7 @@ module.exports.routes = {
 
   'GET /item/detail/:id': 'ItemController.detail',
   'GET /outfit/detail/:id': 'OutfitController.detail',
+  'GET /pkList/detail/:id': 'PkListController.detail',
 
   'GET /item/allItems': 'ItemController.allItems',
   'GET /outfit/allOutfits': 'OutfitController.allOutfits',
@@ -60,6 +61,8 @@ module.exports.routes = {
   'POST /item/returnItems': 'ItemController.returnItems',
   'GET /outfit/returnOutfit': 'OutfitController.returnOutfit',
   'POST /outfit/returnOutfit': 'OutfitController.returnOutfit',
+  'GET /pkList/returnPkList': 'PkListController.returnPkList',
+  'POST /pkList/returnPkList': 'PkListController.returnPkList',
   
 
   'POST /item/create': 'UserController.create',
@@ -71,8 +74,11 @@ module.exports.routes = {
   'POST /item/update/:id': 'ItemController.update',
   'GET /outfit/updateOutfit/:id': 'OutfitController.update',
   'POST /outfit/updateOutfit/:id': 'OutfitController.update',
+  'POST /pkList/updateList/:id': 'PkListController.updateList',
+
   'GET /user/updateProfile': 'UserController.updateProfile',
   'POST /user/updateProfile': 'UserController.updateProfile',
+  
 
   'GET /item/setStatus/:id': 'ItemController.setStatus',
   'POST /item/setStatus/:id': 'ItemController.setStatus',
@@ -80,6 +86,7 @@ module.exports.routes = {
   'DELETE /item/:id': 'ItemController.delete',
   'DELETE /outfit/:id': 'OutfitController.delete',
   'DELETE /size/:id': 'SizeController.delete',
+  'DELETE /pkList/:id': 'PkListController.delete',
 
   'GET /item/itemCount': 'ItemController.itemCount',
   'GET /item/categoryStat': 'ItemController.categoryStat',
@@ -92,6 +99,8 @@ module.exports.routes = {
 
   '/item/:id/:association': 'ItemController.populate',
   '/outfit/:id/:association': 'OutfitController.populate',
+  '/pkList/:id/:association': 'PkListController.populate',
+
   '/item/:id/:association/add/:fk': 'ItemController.add',
   '/item/:id/:association/remove/:fk': 'ItemController.remove',
 

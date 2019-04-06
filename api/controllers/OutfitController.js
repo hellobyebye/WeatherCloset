@@ -142,7 +142,7 @@ module.exports = {
 
         var model = await Outfit.find({ where: { oName: bOName } });//userId: bUserid,
 
-        console.log("model: " + JSON.stringify(model))
+        console.log("retuenOutfit model: " + JSON.stringify(model))
         return res.json(model);
     },
 

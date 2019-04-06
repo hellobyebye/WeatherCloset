@@ -186,6 +186,23 @@ module.exports = {
         return res.ok('Operation completed.');
     },
 
+    //add item to packing list
+    add: async function (req, res) {
+
+        if (!await Item.findOne(req.params.id)) return res.notFound();
+
+        if (!await PkList.findOne(req.params.fk)) return res.notFound();
+
+        await Item.addToCollection(req.params.id, 'inPkList').members(req.params.fk);
+
+        console.log("req.params.id: " + req.params.id)
+        console.log("req.params.fk: " + req.params.fk)
+        console.log("okk")
+
+        return res.ok('Operation completed.');
+    },
+
+
     // action - return the selected Items 
     returnItems: async function (req, res) {
 
