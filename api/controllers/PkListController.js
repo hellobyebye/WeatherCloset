@@ -130,7 +130,7 @@ module.exports = {
 
         var model = await PkList.find({ where: { listName: bListName } });//userId: bUserid,
 
-        //console.log("model: " + JSON.stringify(model))
+        console.log("model: " + JSON.stringify(model))
         return res.json(model);
     },
 
