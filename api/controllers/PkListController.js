@@ -130,7 +130,21 @@ module.exports = {
 
         var model = await PkList.find({ where: { listName: bListName } });//userId: bUserid,
 
-        console.log("model: " + JSON.stringify(model))
+        console.log("return list by name: " + JSON.stringify(model))
+        return res.json(model);
+    },
+
+     // return pkList 
+     returnPkListById: async function (req, res) {
+
+        const bUserid = req.session.userid;
+        const bId = req.body.id;
+
+        console.log("bId: " + bId)
+
+        var model = await PkList.find({ where: { id: bId } });//userId: bUserid,
+
+        console.log("return list by id: " + JSON.stringify(model))
         return res.json(model);
     },
 

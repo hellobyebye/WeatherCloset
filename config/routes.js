@@ -63,6 +63,7 @@ module.exports.routes = {
   'POST /outfit/returnOutfit': 'OutfitController.returnOutfit',
   'GET /pkList/returnPkList': 'PkListController.returnPkList',
   'POST /pkList/returnPkList': 'PkListController.returnPkList',
+  'POST /pkList/returnPkListById': 'PkListController.returnPkListById',
   
 
   'POST /item/create': 'UserController.create',

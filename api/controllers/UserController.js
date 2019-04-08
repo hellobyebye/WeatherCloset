@@ -75,18 +75,6 @@ module.exports = {
 
     },
 
-    // //add item to my closet
-    // add: async function (req, res) {
-
-    //     if (!await User.findOne(req.session.userid)) return res.notFound();
-
-    //     if (!await Item.findOne(parseInt(req.params.fk))) return res.notFound();
-
-    //     //await User.addToCollection(req.session.userid, 'owns').members(req.params.fk);
-
-    //     return res.ok('Operation completed.');
-
-    // },
 
     //create new user
     signup: async function (req, res) {
@@ -169,20 +157,6 @@ module.exports = {
         }
     },
 
-    // //remove item from my closet
-    // remove: async function (req, res) {
-
-    //     const message = sails.getInvalidIdMsg(req.params);
-
-    //     if (message) return res.badRequest(message);
-
-    //     if (!await User.findOne(req.session.userid)) return res.notFound();
-
-    //     await User.removeFromCollection(req.session.userid, 'owns').members(req.params.fk);
-
-    //     return res.ok('Operation completed.');
-
-    // },
 
     //size
     mySize: async function (req, res) {
@@ -196,7 +170,7 @@ module.exports = {
         }
     },
 
-    // show user profile
+    // return user object -- show user profile
     myProfile: async function (req, res) {
 
         var user = await User.find({ where: { id: req.session.userid } });
@@ -225,8 +199,8 @@ module.exports = {
             var models = await User.update(req.session.userid).set({
                 username: req.body.User.username || req.session.username,
                 email: req.body.User.email || req.session.email,
-                age: req.body.User.age,
                 gender: req.body.User.gender,
+                bDay: req.body.User.bDay,
             }).fetch();
 
             console.log("updat user id: " + JSON.stringify(req.session.userid));
@@ -239,6 +213,19 @@ module.exports = {
             }
 
         }
+    },
+
+    // action - return the user info 
+    returnUserInfo: async function (req, res) {
+
+        const bUserid = req.session.userid;
+
+        console.log("bUserid: " + bUserid)
+
+        var model = await User.find({ where: { id: bUserid } });//userId: bUserid,
+
+        console.log("retuenUserInfo model: " + JSON.stringify(model))
+        return res.json(model);
     },
 
 };

@@ -33,10 +33,12 @@ module.exports = {
       type: 'string',
     },
 
-    age: {
-      type: 'number',
+    bDay: {
+      type: "ref",
+      columnType: "datetime"
     },
 
+   
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
