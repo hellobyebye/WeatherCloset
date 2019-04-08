@@ -13,13 +13,13 @@ module.exports = {
         const qUserid = req.session.userid;
 
         if (req.body != undefined) {
-            
+            console.log("req.body: "+JSON.stringify(req.body))
             const bName = req.body.listName || "";
             const bUserid = req.session.userid;
 
             var model = await PkList.find({
                 where: {
-                    name: {
+                    listName: {
                         contains: bName,
                     },
                     userId: bUserid,
@@ -27,12 +27,13 @@ module.exports = {
                 sort: 'createdAt DESC'
             });
         } else {
+            console.log("req.body is undefined")
             var model = await PkList.find({
                 where: { userId: qUserid, },
                 sort: 'createdAt DESC'
             });
         }
-
+        console.log("model: "+JSON.stringify(model))
         return res.json(model);
 
     },

@@ -234,7 +234,7 @@ module.exports = {
             //console.log("item: " + JSON.stringify(item))
             console.log("item[0]: " + JSON.stringify(item[0]))
             model.push(item[0]);
-            console.log("model after push: " + JSON.stringify(model))
+            //console.log("model after push: " + JSON.stringify(model))
         }
 
         console.log("model before return: " + JSON.stringify(model))

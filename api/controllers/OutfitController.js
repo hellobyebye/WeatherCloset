@@ -128,7 +128,7 @@ module.exports = {
 
         if (!model) return res.notFound();
 
-        console.log("populate: "+ JSON.stringify(model));
+        console.log("populate (outfitController)");
         return res.json(model);
     },
 
@@ -138,11 +138,11 @@ module.exports = {
         const bUserid = req.session.userid;
         const bOName = req.body.oName;
 
-        console.log("bOName: " + bOName)
+        console.log("bOName (returnOutfit): " + bOName)
 
         var model = await Outfit.find({ where: { oName: bOName } });//userId: bUserid,
 
-        console.log("retuenOutfit model: " + JSON.stringify(model))
+        //console.log("retuenOutfit model: " + JSON.stringify(model))
         return res.json(model);
     },
 
